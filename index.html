@@ -91,7 +91,8 @@
         width: 100%;
         z-index: 100;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        align-items: center;
         padding: 16px;
       }
       nav {
@@ -138,6 +139,9 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent; */
       }
+      .logo:hover {
+        color: var(--tertiary);
+      }
       nav a {
         color: var(--muted);
         text-decoration: none;
@@ -146,11 +150,15 @@
         transition: color 0.3s;
       }
       nav a:hover {
-        color: var(--tertiary);
+        color: var(--secondary);
+      }
+      nav .nav-cta:hover {
+        color: var(--primary);
+        box-shadow: 0 8px 30px rgba(126, 203, 90, 0.4);
       }
       .nav-cta {
         padding: 10px 24px;
-        border-radius: 50px;
+        border-radius: 12px;
         font-size: 14px;
         font-weight: 600;
         background: linear-gradient(135deg, var(--secondary), #7ecb5a);
@@ -216,18 +224,19 @@
         transform: translateX(-50%) rotate(-45deg);
       }
       .mobile-menu {
-        position: absolute;
-        top: calc(100% + 12px);
-        right: 0;
-        left: 0;
+        position: relative;
+        top: 12px;
         width: 100%;
+        max-width: 1100px;
         display: none;
         flex-direction: column;
-        gap: 12px;
-        padding: 16px;
+        gap: 20px;
+        padding: 20px 16px;
         border-radius: 14px;
-        background: rgba(17, 22, 17, 0.95);
-        border: 1px solid rgba(184, 233, 148, 0.12);
+        background: rgba(17, 22, 17, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(184, 233, 148, 0.08);
         box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
         align-items: center;
       }
@@ -236,11 +245,14 @@
       }
       .mobile-menu a {
         color: var(--tertiary);
+        text-decoration: none;
+        font-size: 14px;
       }
       .mobile-menu .nav-cta {
         text-align: center;
         color: var(--primary);
         width: 100%;
+        border-radius: 12px;
       }
 
       /* HERO */
@@ -271,6 +283,31 @@
       }
 
       /* PHONE SLIDER */
+      .slider-heading {
+        font-family: var(--font-display);
+        font-size: 38px;
+        font-weight: 600;
+        line-height: 1.15;
+        background: linear-gradient(
+          135deg,
+          var(--tertiary) 30%,
+          var(--secondary)
+        );
+        background-clip: text;
+        color: transparent;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      .slider-subheading {
+        font-size: 18px;
+        color: var(--muted);
+        line-height: 1.5;
+        margin-bottom: 32px;
+        text-align: center;
+        max-width: 420px;
+      }
       .phone-slider {
         position: relative;
         width: 100%;
@@ -327,7 +364,7 @@
       }
 
       .phone.left {
-        transform: translateX(-330px) perspective(1200px) rotateY(25deg)
+        transform: translateX(-270px) perspective(1200px) rotateY(25deg)
           scale(0.85);
         z-index: 1;
         opacity: 0.6;
@@ -339,21 +376,21 @@
         opacity: 1;
       }
       .phone.right {
-        transform: translateX(330px) perspective(1200px) rotateY(-25deg)
+        transform: translateX(270px) perspective(1200px) rotateY(-25deg)
           scale(0.85);
         z-index: 1;
         opacity: 0.6;
         filter: brightness(0.7);
       }
       .phone.hidden-left {
-        transform: translateX(-520px) perspective(1200px) rotateY(40deg)
+        transform: translateX(-440px) perspective(1200px) rotateY(40deg)
           scale(0.65);
         z-index: 0;
         opacity: 0;
         pointer-events: none;
       }
       .phone.hidden-right {
-        transform: translateX(520px) perspective(1200px) rotateY(-40deg)
+        transform: translateX(440px) perspective(1200px) rotateY(-40deg)
           scale(0.65);
         z-index: 0;
         opacity: 0;
@@ -826,10 +863,19 @@
           font-size: 32px;
         }
         .hero {
-          padding-top: 70px;
+          padding-top: 100px;
+        }
+        .slider-heading {
+          font-size: 30px;
+          margin-bottom: 8px;
+        }
+        .slider-subheading {
+          font-size: 16px;
+          margin-bottom: 0px;
+          padding: 0 20px;
         }
         .phone-slider {
-          transform: scale(0.8);
+          transform: scale(0.9);
           height: 600px;
         }
         .phone.left {
@@ -879,15 +925,19 @@
           <span></span>
           <span></span>
         </button>
-        <div class="mobile-menu" aria-label="Mobile navigation">
-          <a href="#features">Features</a>
-          <a href="#how">How It Works</a>
-          <a href="#download">Download</a>
-          <a href="#download" class="nav-cta">Get the App</a>
-        </div>
       </nav>
+      <div class="mobile-menu" aria-label="Mobile navigation">
+        <a href="#features">Features</a>
+        <a href="#how">How It Works</a>
+        <a href="#download">Download</a>
+        <a href="#download" class="nav-cta">Get the App</a>
+      </div>
     </div>
     <section class="hero">
+      <div class="slider-heading">Never Second-Guess<br />Your Fit</div>
+      <p class="slider-subheading">
+        Here's how GoStylens gets you out the door looking your best.
+      </p>
       <div class="phone-slider" id="phoneSlider">
         <div class="phone" id="phone0">
           <div class="notch"></div>
