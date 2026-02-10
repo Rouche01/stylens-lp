@@ -1,13 +1,13 @@
 @font-face {
   font-family: "Clash Display";
-  src: url("fonts/ClashDisplay-Bold.otf") format("opentype");
+  src: url("../fonts/ClashDisplay-Bold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Clash Display";
-  src: url("fonts/ClashDisplay-Semibold.otf") format("opentype");
+  src: url("../fonts/ClashDisplay-Semibold.otf") format("opentype");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -15,7 +15,7 @@
 
 @font-face {
   font-family: "Clash Display";
-  src: url("fonts/ClashDisplay-Medium.otf") format("opentype");
+  src: url("../fonts/ClashDisplay-Medium.otf") format("opentype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -23,28 +23,28 @@
 
 @font-face {
   font-family: "Metropolis";
-  src: url("fonts/Metropolis-Regular.otf") format("opentype");
+  src: url("../fonts/Metropolis-Regular.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Metropolis";
-  src: url("fonts/Metropolis-Medium.otf") format("opentype");
+  src: url("../fonts/Metropolis-Medium.otf") format("opentype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Metropolis";
-  src: url("fonts/Metropolis-Semibold.otf") format("opentype");
+  src: url("../fonts/Metropolis-Semibold.otf") format("opentype");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Metropolis";
-  src: url("fonts/Metropolis-Bold.otf") format("opentype");
+  src: url("../fonts/Metropolis-Bold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;

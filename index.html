@@ -830,6 +830,26 @@
       .social-links a:hover svg {
         fill: var(--tertiary);
       }
+      .footer-links {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 14px;
+      }
+      .footer-links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 13px;
+        transition: color 0.3s;
+      }
+      .footer-links a:hover {
+        color: var(--tertiary);
+      }
+      .footer-divider {
+        color: rgba(184, 233, 148, 0.2);
+        font-size: 13px;
+      }
       footer p {
         color: var(--muted);
         font-size: 13px;
@@ -1345,6 +1365,11 @@
             />
           </svg>
         </a>
+      </div>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy Policy</a>
+        <span class="footer-divider">·</span>
+        <a href="/terms.html">Terms & Conditions</a>
       </div>
       <p>© 2026 GoStylens. All rights reserved. Your style, elevated.</p>
     </footer>
