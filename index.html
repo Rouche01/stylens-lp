@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" />
     <title>GoStylens - Your Smart Outfit Assistant</title>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
@@ -1365,7 +1366,9 @@
         nav.classList.toggle("scrolled", window.scrollY > 20);
       }
       updateNavTransparency();
-      window.addEventListener("scroll", updateNavTransparency, { passive: true });
+      window.addEventListener("scroll", updateNavTransparency, {
+        passive: true,
+      });
     </script>
   </body>
 </html>
