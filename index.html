@@ -3,80 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/globals.css" />
     <link rel="icon" href="favicon.ico" />
     <title>GoStylens - Your personal stylist on the go.</title>
+    <meta
+      name="description"
+      content="GoStylens is an AI-powered outfit assistant that helps you choose what to wear for work, dates, weddings, and special events."
+    />
+    <link rel="canonical" href="https://gostylens.app/" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="GoStylens – AI Outfit Assistant" />
+    <meta
+      property="og:description"
+      content="Choose the perfect outfit for any occasion with AI-powered style recommendations."
+    />
+    <meta property="og:url" content="https://gostylens.app/" />
+    <meta property="og:type" content="website" />
+
     <style>
-      @font-face {
-        font-family: "Clash Display";
-        src: url("fonts/ClashDisplay-Bold.otf") format("opentype");
-        font-weight: 700;
-        font-style: normal;
-        font-display: swap;
-      }
-      @font-face {
-        font-family: "Clash Display";
-        src: url("fonts/ClashDisplay-Semibold.otf") format("opentype");
-        font-weight: 600;
-        font-style: normal;
-        font-display: swap;
-      }
-
-      @font-face {
-        font-family: "Clash Display";
-        src: url("fonts/ClashDisplay-Medium.otf") format("opentype");
-        font-weight: 500;
-        font-style: normal;
-        font-display: swap;
-      }
-
-      @font-face {
-        font-family: "Metropolis";
-        src: url("fonts/Metropolis-Regular.otf") format("opentype");
-        font-weight: 400;
-        font-style: normal;
-        font-display: swap;
-      }
-      @font-face {
-        font-family: "Metropolis";
-        src: url("fonts/Metropolis-Medium.otf") format("opentype");
-        font-weight: 500;
-        font-style: normal;
-        font-display: swap;
-      }
-      @font-face {
-        font-family: "Metropolis";
-        src: url("fonts/Metropolis-Semibold.otf") format("opentype");
-        font-weight: 600;
-        font-style: normal;
-        font-display: swap;
-      }
-      @font-face {
-        font-family: "Metropolis";
-        src: url("fonts/Metropolis-Bold.otf") format("opentype");
-        font-weight: 700;
-        font-style: normal;
-        font-display: swap;
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      :root {
-        --primary: #3d4a3d;
-        --secondary: #b8e994;
-        --tertiary: #e8f5e8;
-        --bg: #1a211a;
-        --bg-deep: #111611;
-        --card: #232b23;
-        --text: #e8f5e8;
-        --muted: #8a9e8a;
-        --font-display: "Clash Display", sans-serif;
-        --font-body: "Metropolis", sans-serif;
-      }
-
       body {
         font-family: var(--font-body);
         background: var(--bg-deep);
@@ -1402,6 +1348,23 @@
       </div>
       <p>© 2026 GoStylens. All rights reserved. Your style, elevated.</p>
     </footer>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "GoStylens",
+        "url": "https://gostylens.app",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Web, iOS, Android",
+        "description": "GoStylens is an AI-powered outfit assistant that helps people choose what to wear for any occasion.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
 
     <script>
       const phones = [
