@@ -2,10 +2,16 @@
 
 body {
   font-family: var(--font-body);
-  background: var(--bg-deep);
+  background: var(--bg);
   color: var(--text);
   line-height: 1.7;
   padding: 120px 20px 80px;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--secondary);
+  outline-offset: 3px;
 }
 
 .nav-wrapper {
@@ -25,19 +31,19 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(17, 22, 17, 0.85);
+  background: rgba(var(--surface-rgb), 0.92);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(184, 233, 148, 0.08);
+  border: 1px solid var(--border);
   border-radius: 16px;
 }
 .back-home {
   font-size: 13px;
   font-weight: 600;
-  color: var(--tertiary);
+  color: var(--muted);
   text-decoration: none;
   padding: 8px 14px;
   border-radius: 999px;
-  background: rgba(17, 22, 17, 0.7);
+  background: var(--bg-alt);
   transition:
     color 0.3s,
     border-color 0.3s;
@@ -50,14 +56,14 @@ nav {
   font-size: 12px;
 }
 .back-home:hover {
-  color: var(--secondary);
+  color: var(--cta);
 }
 
 .container {
   max-width: 900px;
   margin: 0 auto;
-  background: rgba(35, 43, 35, 0.7);
-  border: 1px solid rgba(184, 233, 148, 0.08);
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
   border-radius: 20px;
   padding: 40px;
 }
@@ -66,7 +72,11 @@ nav {
   font-family: var(--font-display);
   font-size: 24px;
   font-weight: 600;
-  background: linear-gradient(135deg, var(--secondary), #7ecb5a);
+  background: linear-gradient(
+    135deg,
+    var(--cta),
+    var(--secondary-deep)
+  );
   background-clip: text;
   color: transparent;
   -webkit-background-clip: text;
@@ -77,7 +87,7 @@ nav {
 h1,
 h2 {
   font-family: var(--font-display);
-  color: var(--tertiary);
+  color: var(--primary);
   font-weight: 600;
 }
 h1 {
@@ -107,7 +117,7 @@ li {
   margin-top: 18px;
 }
 .contact {
-  color: var(--tertiary);
+  color: var(--primary);
   font-weight: 600;
 }
 

@@ -57,14 +57,28 @@
 }
 
 :root {
-  --primary: #3d4a3d;
-  --secondary: #b8e994;
-  --tertiary: #e8f5e8;
-  --bg: #1a211a;
-  --bg-deep: #111611;
-  --card: #232b23;
-  --text: #e8f5e8;
-  --muted: #8a9e8a;
+  --primary: #3D4A3D;
+  --secondary: #7fa081;
+  --secondary-hover: #6b8f76;
+  --secondary-deep: #5b7c66;
+  --cta: #2f5d46;
+  --cta-hover: #244c3a;
+  --tertiary: #f6f3ef;
+  --bg: #f6f3ef;
+  --bg-deep: #efe9e2;
+  --bg-alt: #fbf9f7;
+  --section: #fbf9f7;
+  --card: #ffffff;
+  --text: #1f1d1b;
+  --muted: #4b4743;
+  --text-body: #2a2725; /* near-black charcoal for body text — ~13:1 contrast on --bg */
+  --text-secondary: #6b6560; /* lighter gray for metadata — ~5:1 contrast, passes WCAG AA */
+  --border: #e3ddd6;
+  --accent-soft: #e6efe8;
+  --accent-soft-strong: #d9e7db;
+  --accent-rgb: 127, 160, 129;
+  --ink-rgb: 31, 29, 27;
+  --surface-rgb: 251, 249, 247;
   --font-display: "Clash Display", sans-serif;
   --font-body: "Metropolis", sans-serif;
 }
