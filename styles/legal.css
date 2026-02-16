@@ -2,7 +2,9 @@
 
 body {
   font-family: var(--font-body);
-  background: var(--bg);
+  background:
+    radial-gradient(ellipse at 50% 0%, var(--bg-alt) 0%, transparent 55%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 45%, var(--bg) 100%);
   color: var(--text);
   line-height: 1.7;
   padding: 120px 20px 80px;
@@ -72,11 +74,7 @@ nav {
   font-family: var(--font-display);
   font-size: 24px;
   font-weight: 600;
-  background: linear-gradient(
-    135deg,
-    var(--cta),
-    var(--secondary-deep)
-  );
+  background: linear-gradient(135deg, var(--cta), var(--secondary-deep));
   background-clip: text;
   color: transparent;
   -webkit-background-clip: text;

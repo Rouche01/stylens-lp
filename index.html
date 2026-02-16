@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles/globals.css" />
+    <link rel="stylesheet" href="styles/modal.css" />
     <link rel="icon" href="favicon.ico" />
     <title>GoStylens - Your personal stylist on the go.</title>
     <meta
@@ -25,7 +26,14 @@
     <style>
       body {
         font-family: var(--font-body);
-        background: var(--bg);
+        background:
+          radial-gradient(ellipse at 50% 0%, var(--bg-alt) 0%, transparent 55%),
+          linear-gradient(
+            180deg,
+            var(--bg) 0%,
+            var(--bg-deep) 45%,
+            var(--bg) 100%
+          );
         color: var(--text);
         overflow-x: hidden;
       }
@@ -236,22 +244,6 @@
         padding: 72px 40px 64px;
         box-shadow: 0 20px 50px rgba(var(--ink-rgb), 0.08);
       }
-      .hero::before {
-        content: "";
-        position: absolute;
-        top: -200px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 800px;
-        height: 800px;
-        background: radial-gradient(
-          circle,
-          rgba(var(--accent-rgb), 0.1) 0%,
-          transparent 70%
-        );
-        pointer-events: none;
-      }
-
       /* PHONE SLIDER */
       .slider-heading {
         font-family: var(--font-display);
@@ -330,33 +322,33 @@
       }
 
       .phone.left {
-        transform: translateX(-290px) perspective(1200px) rotateY(25deg)
-          scale(0.85);
+        transform: translateX(-290px) perspective(800px) rotateY(30deg)
+          scale(0.88);
         z-index: 1;
-        opacity: 0.6;
-        filter: brightness(0.7);
+        opacity: 0.75;
+        filter: brightness(0.82);
       }
       .phone.center {
-        transform: translateX(0) perspective(1200px) rotateY(0deg) scale(1);
+        transform: translateX(0) perspective(800px) rotateY(0deg) scale(1);
         z-index: 3;
         opacity: 1;
       }
       .phone.right {
-        transform: translateX(290px) perspective(1200px) rotateY(-25deg)
-          scale(0.85);
+        transform: translateX(290px) perspective(800px) rotateY(-30deg)
+          scale(0.88);
         z-index: 1;
-        opacity: 0.6;
-        filter: brightness(0.7);
+        opacity: 0.75;
+        filter: brightness(0.82);
       }
       .phone.hidden-left {
-        transform: translateX(-440px) perspective(1200px) rotateY(40deg)
+        transform: translateX(-440px) perspective(800px) rotateY(45deg)
           scale(0.65);
         z-index: 0;
         opacity: 0;
         pointer-events: none;
       }
       .phone.hidden-right {
-        transform: translateX(440px) perspective(1200px) rotateY(-40deg)
+        transform: translateX(440px) perspective(800px) rotateY(-45deg)
           scale(0.65);
         z-index: 0;
         opacity: 0;
@@ -667,10 +659,33 @@
         padding: 64px 40px;
         max-width: 1100px;
         margin: 0 auto;
-        background: var(--section);
-        border: 1px solid var(--border);
+        background: rgba(var(--surface-rgb), 0.55);
+        border: 1.5px solid rgba(255, 255, 255, 0.45);
         border-radius: 28px;
-        box-shadow: 0 18px 40px rgba(var(--ink-rgb), 0.06);
+        box-shadow:
+          0 18px 40px rgba(var(--ink-rgb), 0.06),
+          inset 0 1px 0 rgba(255, 255, 255, 0.5),
+          inset 0 0 30px rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        position: relative;
+        overflow: hidden;
+      }
+      .features::before {
+        content: "";
+        position: absolute;
+        left: 24px;
+        right: 24px;
+        top: 0;
+        height: 1px;
+        border-radius: 999px;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, 0.5),
+          rgba(255, 255, 255, 0)
+        );
+        pointer-events: none;
       }
       .features-header {
         text-align: center;
@@ -694,33 +709,43 @@
         gap: 24px;
       }
       .feature-card {
-        background: var(--accent-soft);
+        background: rgba(255, 255, 255, 0.35);
         border-radius: 20px;
         padding: 32px;
-        border: 1px solid var(--accent-soft-strong);
+        border: 1px solid rgba(255, 255, 255, 0.5);
         transition:
           transform 0.3s,
-          border-color 0.3s;
-        box-shadow: 0 12px 30px rgba(var(--ink-rgb), 0.04);
+          border-color 0.3s,
+          box-shadow 0.3s,
+          background 0.3s;
+        box-shadow:
+          0 8px 24px rgba(var(--ink-rgb), 0.04),
+          inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
       }
       .feature-card:hover {
         transform: translateY(-4px);
-        border-color: rgba(var(--accent-rgb), 0.35);
+        background: rgba(255, 255, 255, 0.5);
+        border-color: rgba(255, 255, 255, 0.65);
+        box-shadow:
+          0 14px 36px rgba(var(--ink-rgb), 0.08),
+          inset 0 1px 0 rgba(255, 255, 255, 0.7);
       }
       .feature-icon {
-        width: 48px;
-        height: 48px;
+        width: 52px;
+        height: 52px;
         border-radius: 14px;
         margin-bottom: 18px;
-        background: linear-gradient(
-          135deg,
-          rgba(var(--accent-rgb), 0.25),
-          rgba(var(--accent-rgb), 0.12)
-        );
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.75);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.8),
+          0 4px 12px rgba(var(--ink-rgb), 0.06);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 22px;
+        font-size: 24px;
       }
       .feature-card h3 {
         font-family: var(--font-display);
@@ -800,41 +825,84 @@
 
       /* CTA */
       .cta-section {
-        padding: 64px 40px;
+        padding: 40px 20px 80px;
         text-align: center;
-        background: var(--bg-deep);
+        background: transparent;
+        max-width: 1100px;
+        margin: 0 auto;
       }
       .cta-box {
-        max-width: 700px;
+        max-width: 100%;
         margin: 0 auto;
-        background: linear-gradient(
-          135deg,
-          var(--cta) 0%,
-          var(--secondary-deep) 50%,
-          var(--secondary) 100%
-        );
-        border: none;
-        border-radius: 28px;
+        background:
+          radial-gradient(
+            ellipse at 25% 110%,
+            rgba(127, 160, 129, 0.25) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 85% -10%,
+            rgba(91, 124, 102, 0.2) 0%,
+            transparent 45%
+          ),
+          linear-gradient(
+            160deg,
+            #1a2f24 0%,
+            #264a38 30%,
+            #3a6c52 65%,
+            #4d856a 100%
+          );
+        border: 1.5px solid rgba(255, 255, 255, 0.08);
+        border-radius: 24px;
         padding: 64px 40px;
-        box-shadow: 0 20px 50px rgba(var(--ink-rgb), 0.18);
+        box-shadow:
+          0 20px 50px rgba(var(--ink-rgb), 0.18),
+          inset 0 1px 0 rgba(255, 255, 255, 0.08),
+          inset 0 0 40px rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-box::before {
+        content: "";
+        position: absolute;
+        left: 24px;
+        right: 24px;
+        top: 0;
+        height: 1px;
+        border-radius: 999px;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, 0.15),
+          rgba(255, 255, 255, 0)
+        );
+        pointer-events: none;
       }
       .cta-box h2 {
         font-family: var(--font-display);
-        font-size: 36px;
+        font-size: 34px;
         font-weight: 600;
-        margin-bottom: 14px;
+        margin-bottom: 12px;
         color: #ffffff;
       }
       .cta-box p {
-        color: rgba(255, 255, 255, 0.85);
-        font-size: 16px;
-        margin-bottom: 36px;
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 15px;
+        margin-bottom: 32px;
       }
 
       .cta-box .store-btn {
-        background: #ffffff;
+        background: rgba(255, 255, 255, 0.95);
         color: var(--cta);
-        box-shadow: 0 8px 24px rgba(var(--ink-rgb), 0.12);
+        box-shadow:
+          0 8px 24px rgba(var(--ink-rgb), 0.12),
+          inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s,
+          background 0.25s;
       }
       .cta-box .store-btn svg {
         fill: var(--cta);
@@ -846,8 +914,10 @@
         color: var(--cta);
       }
       .cta-box .store-btn:hover {
-        background: var(--bg);
-        box-shadow: 0 12px 36px rgba(var(--ink-rgb), 0.18);
+        background: #ffffff;
+        box-shadow:
+          0 12px 36px rgba(var(--ink-rgb), 0.18),
+          inset 0 1px 0 rgba(255, 255, 255, 0.8);
       }
 
       /* FOOTER */
@@ -943,19 +1013,19 @@
           height: 600px;
         }
         .phone.left {
-          transform: translateX(-260px) perspective(1200px) rotateY(25deg)
-            scale(0.85);
+          transform: translateX(-275px) perspective(800px) rotateY(30deg)
+            scale(0.88);
         }
         .phone.right {
-          transform: translateX(260px) perspective(1200px) rotateY(-25deg)
-            scale(0.85);
+          transform: translateX(275px) perspective(800px) rotateY(-30deg)
+            scale(0.88);
         }
         .phone.hidden-left {
-          transform: translateX(-410px) perspective(1200px) rotateY(40deg)
+          transform: translateX(-420px) perspective(800px) rotateY(45deg)
             scale(0.65);
         }
         .phone.hidden-right {
-          transform: translateX(410px) perspective(1200px) rotateY(-40deg)
+          transform: translateX(420px) perspective(800px) rotateY(-45deg)
             scale(0.65);
         }
         .nav-left,
@@ -989,7 +1059,7 @@
         </div>
         <a href="#" class="logo" aria-label="GoStylens home">GoStylens</a>
         <div class="nav-right">
-          <a href="#download">Download</a>
+          <a href="/pricing.html">Pricing</a>
           <a href="#download" class="nav-cta">Get the App</a>
         </div>
         <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
@@ -1001,7 +1071,7 @@
       <div class="mobile-menu" aria-label="Mobile navigation">
         <a href="#features">Features</a>
         <a href="#how">How It Works</a>
-        <a href="#download">Download</a>
+        <a href="/pricing.html">Pricing</a>
         <a href="#download" class="nav-cta">Get the App</a>
       </div>
     </div>
@@ -1564,5 +1634,6 @@
         passive: true,
       });
     </script>
+    <script src="scripts/modal.js"></script>
   </body>
 </html>

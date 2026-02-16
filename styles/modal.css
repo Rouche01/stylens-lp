@@ -1,0 +1,131 @@
+/* APP MODAL */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(var(--ink-rgb), 0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open {
+  display: flex;
+}
+.modal {
+  background: var(--card);
+  border-radius: 24px;
+  padding: 40px 36px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 24px 60px rgba(var(--ink-rgb), 0.2);
+  animation: modalIn 0.25s ease-out;
+}
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  font-size: 18px;
+  line-height: 1;
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.modal-close:hover {
+  background: var(--border);
+  color: var(--text);
+}
+.modal h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.modal > p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+.modal-qr {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  display: inline-block;
+  margin-bottom: 28px;
+}
+.modal-qr img {
+  display: block;
+  width: 180px;
+  height: 180px;
+  border-radius: 8px;
+}
+.modal-stores {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+.modal-stores .store-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border-radius: 14px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text);
+  font-size: 13px;
+  box-shadow: 0 4px 14px rgba(var(--ink-rgb), 0.12);
+  transition:
+    background 0.2s,
+    box-shadow 0.2s;
+}
+.modal-stores .store-btn:hover {
+  background: var(--bg);
+  box-shadow: 0 8px 24px rgba(var(--ink-rgb), 0.16);
+}
+.modal-stores .store-btn svg {
+  width: 22px;
+  height: 22px;
+  fill: var(--text);
+}
+.modal-stores .store-btn .store-label {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 1.2;
+}
+.modal-stores .store-btn .store-label span {
+  font-size: 9px;
+  color: var(--muted);
+}
+.modal-stores .store-btn .store-label strong {
+  font-size: 14px;
+  color: var(--text);
+}
