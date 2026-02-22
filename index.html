@@ -1,1524 +1,1636 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/globals.css" />
-    <link rel="stylesheet" href="styles/modal.css" />
-    <link rel="icon" href="favicon.ico" />
-    <title>GoStylens - Your personal stylist on the go.</title>
-    <meta
-      name="description"
-      content="GoStylens is an AI-powered outfit assistant that helps you choose what to wear for work, dates, weddings, and special events."
-    />
-    <link rel="canonical" href="https://gostylens.app/" />
-    <meta name="robots" content="index, follow" />
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="GoStylens – AI Outfit Assistant" />
-    <meta
-      property="og:description"
-      content="Choose the perfect outfit for any occasion with AI-powered style recommendations."
-    />
-    <meta property="og:url" content="https://gostylens.app/" />
-    <meta property="og:type" content="website" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles/globals.css" />
+  <link rel="stylesheet" href="styles/modal.css" />
+  <link rel="icon" href="favicon.ico" />
+  <title>GoStylens - Your personal stylist on the go.</title>
+  <meta name="description"
+    content="GoStylens is an AI-powered outfit assistant that helps you choose what to wear for work, dates, weddings, and special events." />
+  <link rel="canonical" href="https://gostylens.app/" />
+  <meta name="robots" content="index, follow" />
 
-    <style>
-      body {
-        font-family: var(--font-body);
-        background:
-          radial-gradient(ellipse at 50% 0%, var(--bg-alt) 0%, transparent 55%),
-          linear-gradient(
-            180deg,
-            var(--bg) 0%,
-            var(--bg-deep) 45%,
-            var(--bg) 100%
-          );
-        color: var(--text);
-        overflow-x: hidden;
+  <!-- Open Graph -->
+  <meta property="og:title" content="GoStylens – AI Outfit Assistant" />
+  <meta property="og:description"
+    content="Choose the perfect outfit for any occasion with AI-powered style recommendations." />
+  <meta property="og:url" content="https://gostylens.app/" />
+  <meta property="og:type" content="website" />
+
+  <style>
+    body {
+      font-family: var(--font-body);
+      background:
+        radial-gradient(ellipse at 50% 0%, var(--bg-alt) 0%, transparent 55%),
+        linear-gradient(180deg,
+          var(--bg) 0%,
+          var(--bg-deep) 45%,
+          var(--bg) 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--secondary);
+      outline-offset: 3px;
+    }
+
+    /* Contrast + hierarchy: high-contrast text and CTA colors */
+    h1,
+    h2,
+    h3 {
+      color: var(--text);
+    }
+
+    /* NAV */
+    .nav-wrapper {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px;
+    }
+
+    nav {
+      width: 100%;
+      max-width: 1100px;
+      padding: 14px 32px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      background: rgba(var(--surface-rgb), 0.25);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid transparent;
+      border-image: linear-gradient(to bottom right,
+          rgba(255, 255, 255, 0.8),
+          rgba(255, 255, 255, 0.1)) 1;
+      border-radius: 16px;
+      position: relative;
+      box-shadow: 0 8px 32px 0 rgba(var(--ink-rgb), 0.08);
+      transition:
+        background 0.3s,
+        border-color 0.3s,
+        box-shadow 0.3s;
+    }
+
+    nav::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: 16px;
+      padding: 1px;
+      background: linear-gradient(135deg,
+          var(--secondary) 0%,
+          #e9c46a 33%,
+          var(--cta) 66%,
+          #2a9d8f 100%);
+      opacity: 0.5;
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    nav.scrolled {
+      background: rgba(var(--surface-rgb), 0.45);
+      box-shadow: 0 10px 30px rgba(var(--ink-rgb), 0.12);
+    }
+
+    .nav-left {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .logo:hover {
+      color: var(--primary);
+    }
+
+    .nav-logo-img {
+      height: 30px;
+      width: auto;
+      display: block;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--cta);
+    }
+
+    nav .nav-cta:hover {
+      color: #ffffff;
+      box-shadow: 0 8px 30px rgba(var(--ink-rgb), 0.18);
+      background: var(--cta-hover);
+    }
+
+    .nav-cta {
+      padding: 12px 28px;
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 600;
+      background: var(--cta);
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 10px 26px rgba(var(--ink-rgb), 0.18);
+    }
+
+    .nav-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      background: rgba(var(--surface-rgb), 0.95);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      transition:
+        border-color 0.3s,
+        background 0.3s;
+    }
+
+    .nav-toggle::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: 12px;
+      padding: 1px;
+      background: linear-gradient(135deg,
+          var(--secondary) 0%,
+          #e9c46a 33%,
+          var(--cta) 66%,
+          #2a9d8f 100%);
+      opacity: 0.5;
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .nav-toggle:hover::before {
+      opacity: 0.8;
+    }
+
+    .nav-toggle:hover {
+      background: rgba(var(--surface-rgb), 0.98);
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--primary);
+      border-radius: 2px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      transition:
+        transform 0.3s,
+        opacity 0.3s,
+        top 0.3s;
+    }
+
+    .nav-toggle span:nth-child(1) {
+      top: 13px;
+    }
+
+    .nav-toggle span:nth-child(2) {
+      top: 20px;
+    }
+
+    .nav-toggle span:nth-child(3) {
+      top: 27px;
+    }
+
+    .nav-toggle.open span:nth-child(1) {
+      top: 20px;
+      transform: translateX(-50%) rotate(45deg);
+    }
+
+    .nav-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.open span:nth-child(3) {
+      top: 20px;
+      transform: translateX(-50%) rotate(-45deg);
+    }
+
+    .mobile-menu {
+      position: relative;
+      top: 12px;
+      width: 100%;
+      max-width: 1100px;
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px 16px;
+      border-radius: 14px;
+      background: rgba(var(--surface-rgb), 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 40px rgba(var(--ink-rgb), 0.16);
+      align-items: center;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .mobile-menu .nav-cta {
+      text-align: center;
+      color: #ffffff;
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 20px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Section card structure: light surface + border + shadow */
+    .hero-card {
+      width: 100%;
+      max-width: 1200px;
+      background: var(--section);
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      padding: 72px 40px 64px;
+      box-shadow: 0 20px 50px rgba(var(--ink-rgb), 0.08);
+    }
+
+    /* PHONE SLIDER */
+    .slider-heading {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 600;
+      line-height: 1.15;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--cta) 70%);
+      background-clip: text;
+      color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .slider-subheading {
+      font-size: 18px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 32px;
+      text-align: center;
+      max-width: 420px;
+    }
+
+    .phone-slider {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      height: 620px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 50px;
+    }
+
+    .phone {
+      position: absolute;
+      width: 300px;
+      height: 600px;
+      border-radius: 32px;
+      background: var(--card);
+      border: 2px solid rgba(var(--accent-rgb), 0.25);
+      overflow: hidden;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 25px 60px rgba(var(--ink-rgb), 0.18);
+    }
+
+    .phone .notch {
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 24px;
+      background: var(--bg-deep);
+      border-radius: 14px;
+      z-index: 5;
+    }
+
+    .phone .screen {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .phone .status-bar {
+      padding: 12px 16px 4px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .phone .screen-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 14px 14px;
+    }
+
+    .phone.left {
+      transform: translateX(-290px) perspective(800px) rotateY(30deg) scale(0.88);
+      z-index: 1;
+      opacity: 0.75;
+      filter: brightness(0.82);
+    }
+
+    .phone.center {
+      transform: translateX(0) perspective(800px) rotateY(0deg) scale(1);
+      z-index: 3;
+      opacity: 1;
+    }
+
+    .phone.right {
+      transform: translateX(290px) perspective(800px) rotateY(-30deg) scale(0.88);
+      z-index: 1;
+      opacity: 0.75;
+      filter: brightness(0.82);
+    }
+
+    .phone.hidden-left {
+      transform: translateX(-440px) perspective(800px) rotateY(45deg) scale(0.65);
+      z-index: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .phone.hidden-right {
+      transform: translateX(440px) perspective(800px) rotateY(-45deg) scale(0.65);
+      z-index: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .screen-1 {
+      background: linear-gradient(180deg,
+          var(--bg-alt) 0%,
+          var(--bg-deep) 100%);
+    }
+
+    .screen-2 {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+    }
+
+    .screen-3 {
+      background: linear-gradient(180deg,
+          var(--bg-alt) 0%,
+          var(--bg-deep) 100%);
+    }
+
+    .screen-4 {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+    }
+
+    .screen-5 {
+      background: linear-gradient(180deg,
+          var(--bg-alt) 0%,
+          var(--bg-deep) 100%);
+    }
+
+    .screen-title {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+
+    .screen-subtitle {
+      font-size: 9px;
+      color: var(--muted);
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+
+    .selfie-box {
+      flex: 1;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(135deg, var(--bg-alt), var(--bg-deep));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .selfie-silhouette {
+      width: 70px;
+      height: 120px;
+      border-radius: 50% 50% 45% 45%;
+      background: rgba(var(--accent-rgb), 0.1);
+      border: 2px dashed rgba(var(--accent-rgb), 0.3);
+      position: relative;
+    }
+
+    .selfie-silhouette::before {
+      content: "";
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(var(--accent-rgb), 0.1);
+      border: 2px dashed rgba(var(--accent-rgb), 0.3);
+    }
+
+    .cam-btn {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 3px solid var(--secondary);
+      background: rgba(var(--accent-rgb), 0.2);
+    }
+
+    .event-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .chip {
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 9px;
+      font-weight: 600;
+      background: var(--accent-soft);
+      color: var(--secondary-deep);
+      border: 1px solid rgba(var(--accent-rgb), 0.25);
+    }
+
+    .chip.active {
+      background: var(--cta);
+      color: #ffffff;
+      border-color: transparent;
+      font-weight: 700;
+    }
+
+    .feedback-card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 10px;
+      margin-bottom: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .score-bar {
+      height: 6px;
+      border-radius: 3px;
+      background: var(--accent-soft);
+      margin-top: 6px;
+    }
+
+    .score-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg,
+          var(--secondary-deep),
+          var(--secondary));
+    }
+
+    .score-label {
+      font-size: 9px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .outfit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .outfit-item {
+      border-radius: 12px;
+      aspect-ratio: 0.75;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .outfit-item .hanger {
+      font-size: 28px;
+      opacity: 0.5;
+    }
+
+    .outfit-item .heart {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      font-size: 10px;
+    }
+
+    .tip-item {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      background: var(--bg-alt);
+      border-radius: 10px;
+      padding: 8px;
+    }
+
+    .tip-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg,
+          rgba(var(--accent-rgb), 0.2),
+          rgba(var(--accent-rgb), 0.12));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+    }
+
+    .tip-text {
+      font-size: 9px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* Slider dots */
+    .slider-dots {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 48px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(var(--accent-rgb), 0.15);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .dot.active {
+      width: 28px;
+      border-radius: 4px;
+      background: linear-gradient(90deg,
+          var(--secondary),
+          var(--secondary-deep));
+    }
+
+    /* Hero text */
+    .hero-text {
+      text-align: center;
+      max-width: 650px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 50px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(var(--accent-rgb), 0.35);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--secondary-deep);
+      margin-bottom: 20px;
+    }
+
+    .hero-text h1 {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 600;
+      line-height: 1.1;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--cta) 70%);
+      background-clip: text;
+      color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-text p {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 36px;
+    }
+
+    /* Store buttons */
+    .store-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .store-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 36px;
+      border-radius: 16px;
+      background: var(--cta);
+      color: #ffffff;
+      border: 1px solid transparent;
+      text-decoration: none;
+      transition:
+        transform 0.3s,
+        box-shadow 0.3s;
+      box-shadow: 0 14px 34px rgba(var(--ink-rgb), 0.18);
+    }
+
+    .store-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(var(--ink-rgb), 0.18);
+      background: var(--cta-hover);
+    }
+
+    .store-btn svg {
+      width: 28px;
+      height: 28px;
+      fill: #ffffff;
+    }
+
+    .store-btn .store-label {
+      text-align: left;
+    }
+
+    .store-btn .store-label span {
+      display: block;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 500;
+    }
+
+    .store-btn .store-label strong {
+      display: block;
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    /* FEATURES */
+    .features {
+      padding: 64px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+      background: rgba(var(--surface-rgb), 0.55);
+      border: 1.5px solid rgba(255, 255, 255, 0.45);
+      border-radius: 28px;
+      box-shadow:
+        0 18px 40px rgba(var(--ink-rgb), 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        inset 0 0 30px rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .features::before {
+      content: "";
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      top: 0;
+      height: 1px;
+      border-radius: 999px;
+      background: linear-gradient(90deg,
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, 0.5),
+          rgba(255, 255, 255, 0));
+      pointer-events: none;
+    }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .features-header h2 {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--primary);
+    }
+
+    .features-header p {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.35);
+      border-radius: 20px;
+      padding: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      transition:
+        transform 0.3s,
+        border-color 0.3s,
+        box-shadow 0.3s,
+        background 0.3s;
+      box-shadow:
+        0 8px 24px rgba(var(--ink-rgb), 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.5);
+      border-color: rgba(255, 255, 255, 0.65);
+      box-shadow:
+        0 14px 36px rgba(var(--ink-rgb), 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    }
+
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      margin-bottom: 18px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        0 4px 12px rgba(var(--ink-rgb), 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .feature-card h3 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* HOW IT WORKS */
+    .how-it-works {
+      padding: 72px 40px;
+    }
+
+    .how-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .how-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .how-header h2 {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--primary);
+    }
+
+    .how-header p {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .steps {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .step {
+      flex: 1;
+      min-width: 200px;
+      max-width: 260px;
+      text-align: center;
+    }
+
+    .step-num {
+      font-family: var(--font-display);
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      margin: 0 auto 18px;
+      background: var(--cta);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .step h3 {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+
+    .step p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* CTA */
+    .cta-section {
+      padding: 40px 20px 80px;
+      text-align: center;
+      background: transparent;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .cta-box {
+      max-width: 100%;
+      margin: 0 auto;
+      background:
+        radial-gradient(ellipse at 25% 110%,
+          rgba(127, 160, 129, 0.25) 0%,
+          transparent 50%),
+        radial-gradient(ellipse at 85% -10%,
+          rgba(91, 124, 102, 0.2) 0%,
+          transparent 45%),
+        linear-gradient(160deg,
+          #1a2f24 0%,
+          #264a38 30%,
+          #3a6c52 65%,
+          #4d856a 100%);
+      border: 1.5px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 64px 40px;
+      box-shadow:
+        0 20px 50px rgba(var(--ink-rgb), 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        inset 0 0 40px rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-box::before {
+      content: "";
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      top: 0;
+      height: 1px;
+      border-radius: 999px;
+      background: linear-gradient(90deg,
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, 0.15),
+          rgba(255, 255, 255, 0));
+      pointer-events: none;
+    }
+
+    .cta-box h2 {
+      font-family: var(--font-display);
+      font-size: 34px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #ffffff;
+    }
+
+    .cta-box p {
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 15px;
+      margin-bottom: 32px;
+    }
+
+    .cta-box .store-btn {
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--cta);
+      box-shadow:
+        0 8px 24px rgba(var(--ink-rgb), 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      transition:
+        transform 0.25s,
+        box-shadow 0.25s,
+        background 0.25s;
+    }
+
+    .cta-box .store-btn svg {
+      fill: var(--cta);
+    }
+
+    .cta-box .store-btn .store-label span {
+      color: var(--muted);
+    }
+
+    .cta-box .store-btn .store-label strong {
+      color: var(--cta);
+    }
+
+    .cta-box .store-btn:hover {
+      background: #ffffff;
+      box-shadow:
+        0 12px 36px rgba(var(--ink-rgb), 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 40px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-alt);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition:
+        border-color 0.3s,
+        background 0.3s,
+        transform 0.3s;
+    }
+
+    .social-links a:hover {
+      border-color: rgba(var(--accent-rgb), 0.3);
+      background: var(--accent-soft);
+      transform: translateY(-2px);
+    }
+
+    .social-links a svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--muted);
+      transition: fill 0.3s;
+    }
+
+    .social-links a:hover svg {
+      fill: var(--primary);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--cta);
+    }
+
+    .footer-divider {
+      color: var(--border);
+      font-size: 13px;
+    }
+
+    footer p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 768px) {
+      .features-grid {
+        grid-template-columns: 1fr;
       }
 
-      a:focus-visible,
-      button:focus-visible {
-        outline: 2px solid var(--secondary);
-        outline-offset: 3px;
-      }
-      /* Contrast + hierarchy: high-contrast text and CTA colors */
-      h1,
-      h2,
-      h3 {
-        color: var(--text);
+      .hero-text h1 {
+        font-size: 32px;
       }
 
-      /* NAV */
-      .nav-wrapper {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 100;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 16px;
-      }
-      nav {
-        width: 100%;
-        max-width: 1100px;
-        padding: 14px 32px;
-        display: grid;
-        grid-template-columns: 1fr auto 1fr;
-        align-items: center;
-        background: rgba(var(--surface-rgb), 0.92);
-        backdrop-filter: blur(20px);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        position: relative;
-        transition:
-          background 0.3s,
-          border-color 0.3s,
-          box-shadow 0.3s;
-      }
-      nav.scrolled {
-        background: rgba(var(--surface-rgb), 0.97);
-        border-color: rgba(var(--accent-rgb), 0.22);
-        box-shadow: 0 10px 30px rgba(var(--ink-rgb), 0.12);
-      }
-      .nav-left {
-        display: flex;
-        gap: 32px;
-        align-items: center;
-      }
-      .nav-right {
-        display: flex;
-        gap: 32px;
-        align-items: center;
-        justify-content: flex-end;
-      }
-      .logo {
-        font-family: var(--font-display);
-        font-size: 24px;
-        font-weight: 600;
-        color: var(--primary);
-        /* background: linear-gradient(135deg, var(--secondary), var(--secondary-deep));
-        background-clip: text;
-        color: transparent;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent; */
-      }
-      .logo:hover {
-        color: var(--primary);
-      }
-      nav a {
-        color: var(--muted);
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: 500;
-        transition: color 0.3s;
-      }
-      nav a:hover {
-        color: var(--cta);
-      }
-      nav .nav-cta:hover {
-        color: #ffffff;
-        box-shadow: 0 8px 30px rgba(var(--ink-rgb), 0.18);
-        background: var(--cta-hover);
-      }
-      .nav-cta {
-        padding: 12px 28px;
-        border-radius: 14px;
-        font-size: 14px;
-        font-weight: 600;
-        background: var(--cta);
-        color: #ffffff;
-        border: none;
-        cursor: pointer;
-        text-decoration: none;
-        box-shadow: 0 10px 26px rgba(var(--ink-rgb), 0.18);
-      }
-      .nav-toggle {
-        display: none;
-        width: 42px;
-        height: 42px;
-        border-radius: 12px;
-        border: 1px solid var(--border);
-        background: rgba(var(--surface-rgb), 0.95);
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        position: absolute;
-        right: 18px;
-        top: 50%;
-        transform: translateY(-50%);
-        transition:
-          border-color 0.3s,
-          background 0.3s;
-      }
-      .nav-toggle:hover {
-        border-color: rgba(var(--accent-rgb), 0.45);
-        background: rgba(var(--surface-rgb), 0.98);
-      }
-      .nav-toggle span {
-        display: block;
-        width: 20px;
-        height: 2px;
-        background: var(--primary);
-        border-radius: 2px;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        transition:
-          transform 0.3s,
-          opacity 0.3s,
-          top 0.3s;
-      }
-      .nav-toggle span:nth-child(1) {
-        top: 13px;
-      }
-      .nav-toggle span:nth-child(2) {
-        top: 20px;
-      }
-      .nav-toggle span:nth-child(3) {
-        top: 27px;
-      }
-      .nav-toggle.open span:nth-child(1) {
-        top: 20px;
-        transform: translateX(-50%) rotate(45deg);
-      }
-      .nav-toggle.open span:nth-child(2) {
-        opacity: 0;
-      }
-      .nav-toggle.open span:nth-child(3) {
-        top: 20px;
-        transform: translateX(-50%) rotate(-45deg);
-      }
-      .mobile-menu {
-        position: relative;
-        top: 12px;
-        width: 100%;
-        max-width: 1100px;
-        display: none;
-        flex-direction: column;
-        gap: 20px;
-        padding: 20px 16px;
-        border-radius: 14px;
-        background: rgba(var(--surface-rgb), 0.95);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid var(--border);
-        box-shadow: 0 18px 40px rgba(var(--ink-rgb), 0.16);
-        align-items: center;
-      }
-      .mobile-menu.open {
-        display: flex;
-      }
-      .mobile-menu a {
-        color: var(--muted);
-        text-decoration: none;
-        font-size: 14px;
-      }
-      .mobile-menu .nav-cta {
-        text-align: center;
-        color: #ffffff;
-        width: 100%;
-        border-radius: 12px;
-      }
-
-      /* HERO */
       .hero {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 120px 20px 60px;
-        position: relative;
-        overflow: hidden;
-      }
-      /* Section card structure: light surface + border + shadow */
-      .hero-card {
-        width: 100%;
-        max-width: 1200px;
-        background: var(--section);
-        border: 1px solid var(--border);
-        border-radius: 32px;
-        padding: 72px 40px 64px;
-        box-shadow: 0 20px 50px rgba(var(--ink-rgb), 0.08);
-      }
-      /* PHONE SLIDER */
-      .slider-heading {
-        font-family: var(--font-display);
-        font-size: 48px;
-        font-weight: 600;
-        line-height: 1.15;
-        background: linear-gradient(135deg, var(--primary) 0%, var(--cta) 70%);
-        background-clip: text;
-        color: transparent;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 10px;
-        text-align: center;
-      }
-      .slider-subheading {
-        font-size: 18px;
-        color: var(--muted);
-        line-height: 1.5;
-        margin-bottom: 32px;
-        text-align: center;
-        max-width: 420px;
-      }
-      .phone-slider {
-        position: relative;
-        width: 100%;
-        max-width: 900px;
-        height: 620px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 50px;
+        padding-top: 110px;
       }
 
-      .phone {
-        position: absolute;
-        width: 300px;
+      .hero-card {
+        padding: 56px 24px 52px;
+        border-radius: 24px;
+      }
+
+      .slider-heading {
+        font-size: 32px;
+        margin-bottom: 8px;
+      }
+
+      .slider-subheading {
+        font-size: 16px;
+        margin-bottom: 0px;
+        padding: 0 20px;
+      }
+
+      .phone-slider {
+        transform: scale(0.9);
         height: 600px;
-        border-radius: 32px;
-        background: var(--card);
-        border: 2px solid rgba(var(--accent-rgb), 0.25);
-        overflow: hidden;
-        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 25px 60px rgba(var(--ink-rgb), 0.18);
-      }
-      .phone .notch {
-        position: absolute;
-        top: 8px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 80px;
-        height: 24px;
-        background: var(--bg-deep);
-        border-radius: 14px;
-        z-index: 5;
-      }
-      .phone .screen {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-      }
-      .phone .status-bar {
-        padding: 12px 16px 4px;
-        display: flex;
-        justify-content: space-between;
-        font-size: 10px;
-        color: var(--primary);
-        font-weight: 600;
-      }
-      .phone .screen-content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        padding: 20px 14px 14px;
       }
 
       .phone.left {
-        transform: translateX(-290px) perspective(800px) rotateY(30deg)
-          scale(0.88);
-        z-index: 1;
-        opacity: 0.75;
-        filter: brightness(0.82);
+        transform: translateX(-275px) perspective(800px) rotateY(30deg) scale(0.88);
       }
-      .phone.center {
-        transform: translateX(0) perspective(800px) rotateY(0deg) scale(1);
-        z-index: 3;
-        opacity: 1;
-      }
+
       .phone.right {
-        transform: translateX(290px) perspective(800px) rotateY(-30deg)
-          scale(0.88);
-        z-index: 1;
-        opacity: 0.75;
-        filter: brightness(0.82);
+        transform: translateX(275px) perspective(800px) rotateY(-30deg) scale(0.88);
       }
+
       .phone.hidden-left {
-        transform: translateX(-440px) perspective(800px) rotateY(45deg)
-          scale(0.65);
-        z-index: 0;
-        opacity: 0;
-        pointer-events: none;
+        transform: translateX(-420px) perspective(800px) rotateY(45deg) scale(0.65);
       }
+
       .phone.hidden-right {
-        transform: translateX(440px) perspective(800px) rotateY(-45deg)
-          scale(0.65);
-        z-index: 0;
-        opacity: 0;
-        pointer-events: none;
+        transform: translateX(420px) perspective(800px) rotateY(-45deg) scale(0.65);
       }
 
-      .screen-1 {
-        background: linear-gradient(
-          180deg,
-          var(--bg-alt) 0%,
-          var(--bg-deep) 100%
-        );
-      }
-      .screen-2 {
-        background: linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
-      }
-      .screen-3 {
-        background: linear-gradient(
-          180deg,
-          var(--bg-alt) 0%,
-          var(--bg-deep) 100%
-        );
-      }
-      .screen-4 {
-        background: linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
-      }
-      .screen-5 {
-        background: linear-gradient(
-          180deg,
-          var(--bg-alt) 0%,
-          var(--bg-deep) 100%
-        );
-      }
-
-      .screen-title {
-        font-family: var(--font-display);
-        font-size: 14px;
-        font-weight: 500;
-        margin-bottom: 8px;
-        color: var(--primary);
-      }
-      .screen-subtitle {
-        font-size: 9px;
-        color: var(--muted);
-        margin-bottom: 14px;
-        line-height: 1.4;
-      }
-
-      .selfie-box {
-        flex: 1;
-        border-radius: 16px;
-        overflow: hidden;
-        position: relative;
-        background: linear-gradient(135deg, var(--bg-alt), var(--bg-deep));
+      nav {
         display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .selfie-silhouette {
-        width: 70px;
-        height: 120px;
-        border-radius: 50% 50% 45% 45%;
-        background: rgba(var(--accent-rgb), 0.1);
-        border: 2px dashed rgba(var(--accent-rgb), 0.3);
-        position: relative;
-      }
-      .selfie-silhouette::before {
-        content: "";
-        position: absolute;
-        top: -25px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background: rgba(var(--accent-rgb), 0.1);
-        border: 2px dashed rgba(var(--accent-rgb), 0.3);
-      }
-      .cam-btn {
-        position: absolute;
-        bottom: 12px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        border: 3px solid var(--secondary);
-        background: rgba(var(--accent-rgb), 0.2);
+        justify-content: space-between;
+        padding: 10px 16px;
       }
 
-      .event-chips {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        margin-bottom: 12px;
-      }
-      .chip {
-        padding: 5px 10px;
-        border-radius: 20px;
-        font-size: 9px;
-        font-weight: 600;
-        background: var(--accent-soft);
-        color: var(--secondary-deep);
-        border: 1px solid rgba(var(--accent-rgb), 0.25);
-      }
-      .chip.active {
-        background: var(--cta);
-        color: #ffffff;
-        border-color: transparent;
-        font-weight: 700;
-      }
-
-      .feedback-card {
-        background: var(--card);
-        border-radius: 12px;
-        padding: 10px;
-        margin-bottom: 8px;
-        border: 1px solid var(--border);
-      }
-      .score-bar {
-        height: 6px;
-        border-radius: 3px;
-        background: var(--accent-soft);
-        margin-top: 6px;
-      }
-      .score-fill {
-        height: 100%;
-        border-radius: 3px;
-        background: linear-gradient(
-          90deg,
-          var(--secondary-deep),
-          var(--secondary)
-        );
-      }
-      .score-label {
-        font-size: 9px;
-        color: var(--muted);
-        margin-top: 4px;
-      }
-
-      .outfit-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-        flex: 1;
-      }
-      .outfit-item {
-        border-radius: 12px;
-        aspect-ratio: 0.75;
-        background: var(--bg-alt);
-        border: 1px solid var(--border);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        overflow: hidden;
-      }
-      .outfit-item .hanger {
-        font-size: 28px;
-        opacity: 0.5;
-      }
-      .outfit-item .heart {
-        position: absolute;
-        top: 6px;
-        right: 6px;
-        font-size: 10px;
-      }
-
-      .tip-item {
-        display: flex;
-        gap: 8px;
-        align-items: flex-start;
-        margin-bottom: 10px;
-        background: var(--bg-alt);
-        border-radius: 10px;
-        padding: 8px;
-      }
-      .tip-icon {
-        width: 24px;
-        height: 24px;
-        border-radius: 8px;
-        flex-shrink: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(var(--accent-rgb), 0.2),
-          rgba(var(--accent-rgb), 0.12)
-        );
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 11px;
-      }
-      .tip-text {
-        font-size: 9px;
-        color: var(--muted);
-        line-height: 1.4;
-      }
-
-      /* Slider dots */
-      .slider-dots {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 48px;
-      }
-      .dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: rgba(var(--accent-rgb), 0.15);
-        cursor: pointer;
-        transition: all 0.3s;
-      }
-      .dot.active {
-        width: 28px;
-        border-radius: 4px;
-        background: linear-gradient(
-          90deg,
-          var(--secondary),
-          var(--secondary-deep)
-        );
-      }
-
-      /* Hero text */
-      .hero-text {
-        text-align: center;
-        max-width: 650px;
-      }
-      .hero-badge {
-        display: inline-block;
-        padding: 6px 16px;
-        border-radius: 50px;
-        background: var(--accent-soft);
-        border: 1px solid rgba(var(--accent-rgb), 0.35);
-        font-size: 12px;
-        font-weight: 600;
-        color: var(--secondary-deep);
-        margin-bottom: 20px;
-      }
-      .hero-text h1 {
-        font-family: var(--font-display);
-        font-size: 48px;
-        font-weight: 600;
-        line-height: 1.1;
-        margin-bottom: 18px;
-        background: linear-gradient(135deg, var(--primary) 0%, var(--cta) 70%);
-        background-clip: text;
-        color: transparent;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      .hero-text p {
-        font-size: 17px;
-        color: var(--muted);
-        line-height: 1.6;
-        margin-bottom: 36px;
-      }
-
-      /* Store buttons */
-      .store-buttons {
-        display: flex;
-        gap: 16px;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-      .store-btn {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 16px 36px;
-        border-radius: 16px;
-        background: var(--cta);
-        color: #ffffff;
-        border: 1px solid transparent;
-        text-decoration: none;
-        transition:
-          transform 0.3s,
-          box-shadow 0.3s;
-        box-shadow: 0 14px 34px rgba(var(--ink-rgb), 0.18);
-      }
-      .store-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 40px rgba(var(--ink-rgb), 0.18);
-        background: var(--cta-hover);
-      }
-      .store-btn svg {
-        width: 28px;
-        height: 28px;
-        fill: #ffffff;
-      }
-      .store-btn .store-label {
-        text-align: left;
-      }
-      .store-btn .store-label span {
-        display: block;
-        font-size: 10px;
-        color: rgba(255, 255, 255, 0.8);
-        font-weight: 500;
-      }
-      .store-btn .store-label strong {
-        display: block;
-        font-size: 16px;
-        font-weight: 700;
-        color: #ffffff;
-      }
-
-      /* FEATURES */
-      .features {
-        padding: 64px 40px;
-        max-width: 1100px;
-        margin: 0 auto;
-        background: rgba(var(--surface-rgb), 0.55);
-        border: 1.5px solid rgba(255, 255, 255, 0.45);
-        border-radius: 28px;
-        box-shadow:
-          0 18px 40px rgba(var(--ink-rgb), 0.06),
-          inset 0 1px 0 rgba(255, 255, 255, 0.5),
-          inset 0 0 30px rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        position: relative;
-        overflow: hidden;
-      }
-      .features::before {
-        content: "";
-        position: absolute;
-        left: 24px;
-        right: 24px;
-        top: 0;
-        height: 1px;
-        border-radius: 999px;
-        background: linear-gradient(
-          90deg,
-          rgba(255, 255, 255, 0),
-          rgba(255, 255, 255, 0.5),
-          rgba(255, 255, 255, 0)
-        );
-        pointer-events: none;
-      }
-      .features-header {
-        text-align: center;
-        margin-bottom: 64px;
-      }
-      .features-header h2 {
-        font-family: var(--font-display);
-        font-size: 36px;
-        font-weight: 600;
-        margin-bottom: 12px;
-        color: var(--primary);
-      }
-      .features-header p {
-        color: var(--muted);
+      .mobile-menu a {
         font-size: 16px;
       }
 
-      .features-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
-      }
-      .feature-card {
-        background: rgba(255, 255, 255, 0.35);
-        border-radius: 20px;
-        padding: 32px;
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        transition:
-          transform 0.3s,
-          border-color 0.3s,
-          box-shadow 0.3s,
-          background 0.3s;
-        box-shadow:
-          0 8px 24px rgba(var(--ink-rgb), 0.04),
-          inset 0 1px 0 rgba(255, 255, 255, 0.6);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-      }
-      .feature-card:hover {
-        transform: translateY(-4px);
-        background: rgba(255, 255, 255, 0.5);
-        border-color: rgba(255, 255, 255, 0.65);
-        box-shadow:
-          0 14px 36px rgba(var(--ink-rgb), 0.08),
-          inset 0 1px 0 rgba(255, 255, 255, 0.7);
-      }
-      .feature-icon {
-        width: 52px;
-        height: 52px;
-        border-radius: 14px;
-        margin-bottom: 18px;
-        background: rgba(255, 255, 255, 0.7);
-        border: 1px solid rgba(255, 255, 255, 0.75);
-        box-shadow:
-          inset 0 1px 0 rgba(255, 255, 255, 0.8),
-          0 4px 12px rgba(var(--ink-rgb), 0.06);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-      }
-      .feature-card h3 {
-        font-family: var(--font-display);
-        font-size: 18px;
-        font-weight: 500;
-        margin-bottom: 8px;
-        color: var(--primary);
-      }
-      .feature-card p {
-        font-size: 14px;
-        color: var(--muted);
-        line-height: 1.6;
+      .nav-left,
+      .nav-right {
+        display: none;
       }
 
-      /* HOW IT WORKS */
-      .how-it-works {
-        padding: 72px 40px;
-      }
-      .how-inner {
-        max-width: 900px;
-        margin: 0 auto;
-      }
-      .how-header {
-        text-align: center;
-        margin-bottom: 48px;
-      }
-      .how-header h2 {
-        font-family: var(--font-display);
-        font-size: 36px;
-        font-weight: 600;
-        margin-bottom: 12px;
-        color: var(--primary);
-      }
-      .how-header p {
-        color: var(--muted);
-        font-size: 16px;
+      .nav-toggle {
+        display: inline-flex;
+        position: relative;
+        top: auto;
+        right: auto;
+        transform: none;
       }
 
       .steps {
-        display: flex;
-        gap: 32px;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-      .step {
-        flex: 1;
-        min-width: 200px;
-        max-width: 260px;
-        text-align: center;
-      }
-      .step-num {
-        font-family: var(--font-display);
-        width: 56px;
-        height: 56px;
-        border-radius: 50%;
-        margin: 0 auto 18px;
-        background: var(--cta);
-        display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
-        font-size: 22px;
-        font-weight: 800;
-        color: #ffffff;
-      }
-      .step h3 {
-        font-family: var(--font-display);
-        font-size: 16px;
-        font-weight: 500;
-        margin-bottom: 8px;
-        color: var(--primary);
-      }
-      .step p {
-        font-size: 13px;
-        color: var(--muted);
-        line-height: 1.5;
       }
 
-      /* CTA */
-      .cta-section {
-        padding: 40px 20px 80px;
-        text-align: center;
-        background: transparent;
-        max-width: 1100px;
-        margin: 0 auto;
-      }
       .cta-box {
-        max-width: 100%;
-        margin: 0 auto;
-        background:
-          radial-gradient(
-            ellipse at 25% 110%,
-            rgba(127, 160, 129, 0.25) 0%,
-            transparent 50%
-          ),
-          radial-gradient(
-            ellipse at 85% -10%,
-            rgba(91, 124, 102, 0.2) 0%,
-            transparent 45%
-          ),
-          linear-gradient(
-            160deg,
-            #1a2f24 0%,
-            #264a38 30%,
-            #3a6c52 65%,
-            #4d856a 100%
-          );
-        border: 1.5px solid rgba(255, 255, 255, 0.08);
-        border-radius: 24px;
-        padding: 64px 40px;
-        box-shadow:
-          0 20px 50px rgba(var(--ink-rgb), 0.18),
-          inset 0 1px 0 rgba(255, 255, 255, 0.08),
-          inset 0 0 40px rgba(255, 255, 255, 0.03);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        position: relative;
-        overflow: hidden;
+        padding: 40px 24px;
       }
-      .cta-box::before {
-        content: "";
-        position: absolute;
-        left: 24px;
-        right: 24px;
-        top: 0;
-        height: 1px;
-        border-radius: 999px;
-        background: linear-gradient(
-          90deg,
-          rgba(255, 255, 255, 0),
-          rgba(255, 255, 255, 0.15),
-          rgba(255, 255, 255, 0)
-        );
-        pointer-events: none;
-      }
+
+      .features-header h2,
+      .how-header h2,
       .cta-box h2 {
-        font-family: var(--font-display);
-        font-size: 34px;
-        font-weight: 600;
-        margin-bottom: 12px;
-        color: #ffffff;
-      }
-      .cta-box p {
-        color: rgba(255, 255, 255, 0.75);
-        font-size: 15px;
-        margin-bottom: 32px;
+        font-size: 28px;
       }
 
-      .cta-box .store-btn {
-        background: rgba(255, 255, 255, 0.95);
-        color: var(--cta);
-        box-shadow:
-          0 8px 24px rgba(var(--ink-rgb), 0.12),
-          inset 0 1px 0 rgba(255, 255, 255, 0.8);
-        transition:
-          transform 0.25s,
-          box-shadow 0.25s,
-          background 0.25s;
+      .nav-logo-img {
+        height: 28px;
       }
-      .cta-box .store-btn svg {
-        fill: var(--cta);
-      }
-      .cta-box .store-btn .store-label span {
-        color: var(--muted);
-      }
-      .cta-box .store-btn .store-label strong {
-        color: var(--cta);
-      }
-      .cta-box .store-btn:hover {
-        background: #ffffff;
-        box-shadow:
-          0 12px 36px rgba(var(--ink-rgb), 0.18),
-          inset 0 1px 0 rgba(255, 255, 255, 0.8);
-      }
+    }
+  </style>
+</head>
 
-      /* FOOTER */
-      footer {
-        padding: 40px;
-        text-align: center;
-        border-top: 1px solid var(--border);
-      }
-      .social-links {
-        display: flex;
-        gap: 16px;
-        justify-content: center;
-        margin-bottom: 20px;
-      }
-      .social-links a {
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
-        border: 1px solid var(--border);
-        background: var(--bg-alt);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition:
-          border-color 0.3s,
-          background 0.3s,
-          transform 0.3s;
-      }
-      .social-links a:hover {
-        border-color: rgba(var(--accent-rgb), 0.3);
-        background: var(--accent-soft);
-        transform: translateY(-2px);
-      }
-      .social-links a svg {
-        width: 18px;
-        height: 18px;
-        fill: var(--muted);
-        transition: fill 0.3s;
-      }
-      .social-links a:hover svg {
-        fill: var(--primary);
-      }
-      .footer-links {
-        display: flex;
-        gap: 8px;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 14px;
-      }
-      .footer-links a {
-        color: var(--muted);
-        text-decoration: none;
-        font-size: 13px;
-        transition: color 0.3s;
-      }
-      .footer-links a:hover {
-        color: var(--cta);
-      }
-      .footer-divider {
-        color: var(--border);
-        font-size: 13px;
-      }
-      footer p {
-        color: var(--muted);
-        font-size: 13px;
-      }
-
-      @media (max-width: 768px) {
-        .features-grid {
-          grid-template-columns: 1fr;
-        }
-        .hero-text h1 {
-          font-size: 32px;
-        }
-        .hero {
-          padding-top: 100px;
-        }
-        .hero-card {
-          padding: 56px 24px 52px;
-          border-radius: 24px;
-        }
-        .slider-heading {
-          font-size: 30px;
-          margin-bottom: 8px;
-        }
-        .slider-subheading {
-          font-size: 16px;
-          margin-bottom: 0px;
-          padding: 0 20px;
-        }
-        .phone-slider {
-          transform: scale(0.9);
-          height: 600px;
-        }
-        .phone.left {
-          transform: translateX(-275px) perspective(800px) rotateY(30deg)
-            scale(0.88);
-        }
-        .phone.right {
-          transform: translateX(275px) perspective(800px) rotateY(-30deg)
-            scale(0.88);
-        }
-        .phone.hidden-left {
-          transform: translateX(-420px) perspective(800px) rotateY(45deg)
-            scale(0.65);
-        }
-        .phone.hidden-right {
-          transform: translateX(420px) perspective(800px) rotateY(-45deg)
-            scale(0.65);
-        }
-        .nav-left,
-        .nav-right {
-          display: none;
-        }
-        .nav-toggle {
-          display: inline-flex;
-        }
-        .steps {
-          flex-direction: column;
-          align-items: center;
-        }
-        .cta-box {
-          padding: 40px 24px;
-        }
-        .features-header h2,
-        .how-header h2,
-        .cta-box h2 {
-          font-size: 28px;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="nav-wrapper">
-      <nav>
-        <div class="nav-left">
-          <a href="#features">Features</a>
-          <a href="#how">How It Works</a>
-        </div>
-        <a href="#" class="logo" aria-label="GoStylens home">GoStylens</a>
-        <div class="nav-right">
-          <a href="/pricing.html">Pricing</a>
-          <a href="#download" class="nav-cta">Get the App</a>
-        </div>
-        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </nav>
-      <div class="mobile-menu" aria-label="Mobile navigation">
+<body>
+  <div class="nav-wrapper">
+    <nav>
+      <div class="nav-left">
         <a href="#features">Features</a>
         <a href="#how">How It Works</a>
+      </div>
+      <a href="#" class="logo" aria-label="GoStylens home">
+        <img src="/assets/logo_primary.png" alt="GoStylens Logo" class="nav-logo-img" />
+      </a>
+      <div class="nav-right">
         <a href="/pricing.html">Pricing</a>
         <a href="#download" class="nav-cta">Get the App</a>
       </div>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+    <div class="mobile-menu" aria-label="Mobile navigation">
+      <a href="#features">Features</a>
+      <a href="#how">How It Works</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="#download" class="nav-cta">Get the App</a>
     </div>
-    <section class="hero">
-      <div class="slider-heading">Never Second-Guess<br />Your Fit</div>
-      <p class="slider-subheading">
-        Here's how GoStylens gets you out the door looking your best.
-      </p>
-      <div class="phone-slider" id="phoneSlider">
-        <div class="phone" id="phone0">
-          <div class="notch"></div>
-          <div class="screen screen-1">
-            <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
-            <div class="screen-content">
-              <div class="screen-title">📸 Take a Selfie</div>
-              <div class="screen-subtitle">
-                Snap a mirror pic and let GoStylens analyze your outfit
-              </div>
-              <div class="selfie-box">
-                <div class="selfie-silhouette"></div>
-                <div class="cam-btn"></div>
-              </div>
+  </div>
+  <section class="hero">
+    <div class="slider-heading">Never Second-Guess<br />Your Fit</div>
+    <p class="slider-subheading">
+      Here's how GoStylens gets you out the door looking your best.
+    </p>
+    <div class="phone-slider" id="phoneSlider">
+      <div class="phone" id="phone0">
+        <div class="notch"></div>
+        <div class="screen screen-1">
+          <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
+          <div class="screen-content">
+            <div class="screen-title">📸 Take a Selfie</div>
+            <div class="screen-subtitle">
+              Snap a mirror pic and let GoStylens analyze your outfit
+            </div>
+            <div class="selfie-box">
+              <div class="selfie-silhouette"></div>
+              <div class="cam-btn"></div>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="phone" id="phone1">
-          <div class="notch"></div>
-          <div class="screen screen-2">
-            <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
-            <div class="screen-content">
-              <div class="screen-title">🎯 Where are you going?</div>
-              <div class="screen-subtitle">
-                Select your occasion for personalized feedback
-              </div>
-              <div class="event-chips">
-                <div class="chip">💼 Work</div>
-                <div class="chip active">🥂 Date Night</div>
-                <div class="chip">💒 Wedding</div>
-                <div class="chip">🏖️ Casual</div>
-                <div class="chip">🎉 Party</div>
-                <div class="chip">🏋️ Gym</div>
-                <div class="chip">☕ Brunch</div>
-                <div class="chip">🎓 Interview</div>
-              </div>
-              <div class="feedback-card" style="margin-top: auto">
-                <div
-                  style="
+      <div class="phone" id="phone1">
+        <div class="notch"></div>
+        <div class="screen screen-2">
+          <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
+          <div class="screen-content">
+            <div class="screen-title">🎯 Where are you going?</div>
+            <div class="screen-subtitle">
+              Select your occasion for personalized feedback
+            </div>
+            <div class="event-chips">
+              <div class="chip">💼 Work</div>
+              <div class="chip active">🥂 Date Night</div>
+              <div class="chip">💒 Wedding</div>
+              <div class="chip">🏖️ Casual</div>
+              <div class="chip">🎉 Party</div>
+              <div class="chip">🏋️ Gym</div>
+              <div class="chip">☕ Brunch</div>
+              <div class="chip">🎓 Interview</div>
+            </div>
+            <div class="feedback-card" style="margin-top: auto">
+              <div style="
                     font-size: 10px;
                     font-weight: 600;
                     color: var(--secondary);
-                  "
-                >
-                  Selected: Date Night
-                </div>
-                <div
-                  style="font-size: 9px; color: var(--muted); margin-top: 4px"
-                >
-                  Smart casual to semi-formal recommended
-                </div>
+                  ">
+                Selected: Date Night
+              </div>
+              <div style="font-size: 9px; color: var(--muted); margin-top: 4px">
+                Smart casual to semi-formal recommended
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="phone" id="phone2">
-          <div class="notch"></div>
-          <div class="screen screen-3">
-            <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
-            <div class="screen-content">
-              <div class="screen-title">✨ Style Score</div>
-              <div class="screen-subtitle">AI-powered outfit feedback</div>
-              <div class="feedback-card">
-                <div
-                  style="
+      <div class="phone" id="phone2">
+        <div class="notch"></div>
+        <div class="screen screen-3">
+          <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
+          <div class="screen-content">
+            <div class="screen-title">✨ Style Score</div>
+            <div class="screen-subtitle">AI-powered outfit feedback</div>
+            <div class="feedback-card">
+              <div style="
                     font-family: var(--font-display);
                     font-size: 20px;
                     font-weight: 800;
                     color: var(--secondary);
-                  "
-                >
-                  8.5<span style="font-size: 12px; color: var(--muted)"
-                    >/10</span
-                  >
-                </div>
-                <div class="score-bar">
-                  <div class="score-fill" style="width: 85%"></div>
-                </div>
-                <div class="score-label">Outfit Match for Date Night</div>
+                  ">
+                8.5<span style="font-size: 12px; color: var(--muted)">/10</span>
               </div>
-              <div class="feedback-card">
-                <div
-                  style="
+              <div class="score-bar">
+                <div class="score-fill" style="width: 85%"></div>
+              </div>
+              <div class="score-label">Outfit Match for Date Night</div>
+            </div>
+            <div class="feedback-card">
+              <div style="
                     font-size: 10px;
                     font-weight: 600;
                     color: var(--primary);
-                  "
-                >
-                  💡 Quick Tips
-                </div>
-                <div
-                  style="
+                  ">
+                💡 Quick Tips
+              </div>
+              <div style="
                     font-size: 9px;
                     color: var(--muted);
                     margin-top: 4px;
                     line-height: 1.5;
-                  "
-                >
-                  • Swap sneakers for loafers (+1.0)<br />• Add a watch for a
-                  polished look<br />• Colors work great together ✓
-                </div>
+                  ">
+                • Swap sneakers for loafers (+1.0)<br />• Add a watch for a
+                polished look<br />• Colors work great together ✓
               </div>
-              <div class="feedback-card" style="margin-top: auto">
-                <div
-                  style="
+            </div>
+            <div class="feedback-card" style="margin-top: auto">
+              <div style="
                     font-size: 10px;
                     font-weight: 600;
                     color: var(--secondary);
-                  "
-                >
-                  🔥 Confidence Boost
-                </div>
-                <div
-                  style="font-size: 9px; color: var(--muted); margin-top: 3px"
-                >
-                  "You'll turn heads tonight!"
-                </div>
+                  ">
+                🔥 Confidence Boost
+              </div>
+              <div style="font-size: 9px; color: var(--muted); margin-top: 3px">
+                "You'll turn heads tonight!"
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="phone" id="phone3">
-          <div class="notch"></div>
-          <div class="screen screen-4">
-            <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
-            <div class="screen-content">
-              <div class="screen-title">👗 My Wardrobe</div>
-              <div class="screen-subtitle">
-                Your saved outfits & style history
+      <div class="phone" id="phone3">
+        <div class="notch"></div>
+        <div class="screen screen-4">
+          <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
+          <div class="screen-content">
+            <div class="screen-title">👗 My Wardrobe</div>
+            <div class="screen-subtitle">
+              Your saved outfits & style history
+            </div>
+            <div class="outfit-grid">
+              <div class="outfit-item">
+                <span class="hanger">👔</span><span class="heart">💚</span>
               </div>
-              <div class="outfit-grid">
-                <div class="outfit-item">
-                  <span class="hanger">👔</span><span class="heart">💚</span>
-                </div>
-                <div class="outfit-item">
-                  <span class="hanger">👗</span><span class="heart">🤍</span>
-                </div>
-                <div class="outfit-item">
-                  <span class="hanger">🧥</span><span class="heart">💚</span>
-                </div>
-                <div class="outfit-item">
-                  <span class="hanger">👕</span><span class="heart">🤍</span>
-                </div>
+              <div class="outfit-item">
+                <span class="hanger">👗</span><span class="heart">🤍</span>
               </div>
-              <div
-                style="
+              <div class="outfit-item">
+                <span class="hanger">🧥</span><span class="heart">💚</span>
+              </div>
+              <div class="outfit-item">
+                <span class="hanger">👕</span><span class="heart">🤍</span>
+              </div>
+            </div>
+            <div style="
                   font-size: 9px;
                   color: var(--muted);
                   text-align: center;
                   margin-top: 10px;
-                "
-              >
-                12 outfits saved • 4 favorites
-              </div>
+                ">
+              12 outfits saved • 4 favorites
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="phone" id="phone4">
-          <div class="notch"></div>
-          <div class="screen screen-5">
-            <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
-            <div class="screen-content">
-              <div class="screen-title">🧠 Smart Suggestions</div>
-              <div class="screen-subtitle">Based on your style profile</div>
-              <div class="tip-item">
-                <div class="tip-icon">👖</div>
-                <div>
-                  <div
-                    style="
+      <div class="phone" id="phone4">
+        <div class="notch"></div>
+        <div class="screen screen-5">
+          <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
+          <div class="screen-content">
+            <div class="screen-title">🧠 Smart Suggestions</div>
+            <div class="screen-subtitle">Based on your style profile</div>
+            <div class="tip-item">
+              <div class="tip-icon">👖</div>
+              <div>
+                <div style="
                       font-size: 10px;
                       font-weight: 600;
                       color: var(--primary);
-                    "
-                  >
-                    Dark Slim Jeans
-                  </div>
-                  <div class="tip-text">
-                    Pairs perfectly with 6 of your saved tops
-                  </div>
+                    ">
+                  Dark Slim Jeans
+                </div>
+                <div class="tip-text">
+                  Pairs perfectly with 6 of your saved tops
                 </div>
               </div>
-              <div class="tip-item">
-                <div class="tip-icon">🧣</div>
-                <div>
-                  <div
-                    style="
+            </div>
+            <div class="tip-item">
+              <div class="tip-icon">🧣</div>
+              <div>
+                <div style="
                       font-size: 10px;
                       font-weight: 600;
                       color: var(--primary);
-                    "
-                  >
-                    Neutral Scarf
-                  </div>
-                  <div class="tip-text">
-                    Adds versatility to your fall wardrobe
-                  </div>
+                    ">
+                  Neutral Scarf
+                </div>
+                <div class="tip-text">
+                  Adds versatility to your fall wardrobe
                 </div>
               </div>
-              <div class="tip-item">
-                <div class="tip-icon">👟</div>
-                <div>
-                  <div
-                    style="
+            </div>
+            <div class="tip-item">
+              <div class="tip-icon">👟</div>
+              <div>
+                <div style="
                       font-size: 10px;
                       font-weight: 600;
                       color: var(--primary);
-                    "
-                  >
-                    White Minimalist Sneakers
-                  </div>
-                  <div class="tip-text">Matches 80% of your casual outfits</div>
+                    ">
+                  White Minimalist Sneakers
                 </div>
+                <div class="tip-text">Matches 80% of your casual outfits</div>
               </div>
-              <div
-                class="feedback-card"
-                style="margin-top: auto; text-align: center"
-              >
-                <div
-                  style="
+            </div>
+            <div class="feedback-card" style="margin-top: auto; text-align: center">
+              <div style="
                     font-size: 10px;
                     font-weight: 600;
                     color: var(--secondary);
-                  "
-                >
-                  🎯 Style DNA: Modern Minimal
-                </div>
+                  ">
+                🎯 Style DNA: Modern Minimal
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="slider-dots" id="sliderDots">
-        <div class="dot active" onclick="goTo(0)"></div>
-        <div class="dot" onclick="goTo(1)"></div>
-        <div class="dot" onclick="goTo(2)"></div>
-        <div class="dot" onclick="goTo(3)"></div>
-        <div class="dot" onclick="goTo(4)"></div>
+    <div class="slider-dots" id="sliderDots">
+      <div class="dot active" onclick="goTo(0)"></div>
+      <div class="dot" onclick="goTo(1)"></div>
+      <div class="dot" onclick="goTo(2)"></div>
+      <div class="dot" onclick="goTo(3)"></div>
+      <div class="dot" onclick="goTo(4)"></div>
+    </div>
+
+    <div class="hero-text">
+      <div class="hero-badge">✨ AI-Powered Style Assistant</div>
+      <h1>Your Personal Stylist,<br />Right in Your Pocket</h1>
+      <p>
+        Snap a selfie, tell us where you're headed, and get instant AI
+        feedback on your outfit. GoStylens learns your style and helps you
+        look your best — every single day.
+      </p>
+      <div class="store-buttons" id="download">
+        <a href="#" class="store-btn">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+          </svg>
+          <div class="store-label">
+            <span>Download on the</span><strong>App Store</strong>
+          </div>
+        </a>
+        <a href="#" class="store-btn">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.807 1.626a1 1 0 010 1.732l-2.807 1.627L15.206 12l2.492-2.492zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z" />
+          </svg>
+          <div class="store-label">
+            <span>Get it on</span><strong>Google Play</strong>
+          </div>
+        </a>
       </div>
+    </div>
+  </section>
 
-      <div class="hero-text">
-        <div class="hero-badge">✨ AI-Powered Style Assistant</div>
-        <h1>Your Personal Stylist,<br />Right in Your Pocket</h1>
+  <section class="features" id="features">
+    <div class="features-header">
+      <h2>Why GoStylens?</h2>
+      <p>Smart features that make getting dressed effortless</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📸</div>
+        <h3>Snap & Analyze</h3>
         <p>
-          Snap a selfie, tell us where you're headed, and get instant AI
-          feedback on your outfit. GoStylens learns your style and helps you
-          look your best — every single day.
+          Take a quick mirror selfie and our AI instantly understands your
+          outfit — colors, fit, style, and vibe.
         </p>
-        <div class="store-buttons" id="download">
-          <a href="#" class="store-btn">
-            <svg viewBox="0 0 24 24">
-              <path
-                d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
-              />
-            </svg>
-            <div class="store-label">
-              <span>Download on the</span><strong>App Store</strong>
-            </div>
-          </a>
-          <a href="#" class="store-btn">
-            <svg viewBox="0 0 24 24">
-              <path
-                d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.807 1.626a1 1 0 010 1.732l-2.807 1.627L15.206 12l2.492-2.492zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"
-              />
-            </svg>
-            <div class="store-label">
-              <span>Get it on</span><strong>Google Play</strong>
-            </div>
-          </a>
-        </div>
       </div>
-    </section>
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>Occasion-Perfect</h3>
+        <p>
+          Whether it's a boardroom meeting or a beach party, get feedback
+          tailored to exactly where you're going.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧠</div>
+        <h3>Learns Your Style</h3>
+        <p>
+          The more you use it, the smarter it gets. GoStylens builds your
+          unique style DNA over time.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💡</div>
+        <h3>Instant Tips</h3>
+        <p>
+          Simple, actionable suggestions to elevate your look — swap this, add
+          that, you're golden.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👗</div>
+        <h3>Wardrobe Memory</h3>
+        <p>
+          Save your best looks and build a digital wardrobe. Never forget an
+          outfit that got compliments.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✨</div>
+        <h3>Smart Suggestions</h3>
+        <p>
+          Get personalized outfit ideas based on what's already worked for
+          you. Less guessing, more dressing.
+        </p>
+      </div>
+    </div>
+  </section>
 
-    <section class="features" id="features">
-      <div class="features-header">
-        <h2>Why GoStylens?</h2>
-        <p>Smart features that make getting dressed effortless</p>
+  <section class="how-it-works" id="how">
+    <div class="how-inner">
+      <div class="how-header">
+        <h2>How It Works</h2>
+        <p>Three simple steps to outfit confidence</p>
       </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">📸</div>
-          <h3>Snap & Analyze</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Snap a Selfie</h3>
           <p>
-            Take a quick mirror selfie and our AI instantly understands your
-            outfit — colors, fit, style, and vibe.
+            Take a quick mirror pic in what you're wearing. No perfect angles
+            needed.
           </p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">🎯</div>
-          <h3>Occasion-Perfect</h3>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Set the Scene</h3>
           <p>
-            Whether it's a boardroom meeting or a beach party, get feedback
-            tailored to exactly where you're going.
+            Tell GoStylens where you're going — work, a date, brunch, or
+            anywhere else.
           </p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">🧠</div>
-          <h3>Learns Your Style</h3>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Get Styled</h3>
           <p>
-            The more you use it, the smarter it gets. GoStylens builds your
-            unique style DNA over time.
-          </p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">💡</div>
-          <h3>Instant Tips</h3>
-          <p>
-            Simple, actionable suggestions to elevate your look — swap this, add
-            that, you're golden.
-          </p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">👗</div>
-          <h3>Wardrobe Memory</h3>
-          <p>
-            Save your best looks and build a digital wardrobe. Never forget an
-            outfit that got compliments.
-          </p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">✨</div>
-          <h3>Smart Suggestions</h3>
-          <p>
-            Get personalized outfit ideas based on what's already worked for
-            you. Less guessing, more dressing.
+            Receive instant feedback, a style score, and tips to look your
+            absolute best.
           </p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="how-it-works" id="how">
-      <div class="how-inner">
-        <div class="how-header">
-          <h2>How It Works</h2>
-          <p>Three simple steps to outfit confidence</p>
-        </div>
-        <div class="steps">
-          <div class="step">
-            <div class="step-num">1</div>
-            <h3>Snap a Selfie</h3>
-            <p>
-              Take a quick mirror pic in what you're wearing. No perfect angles
-              needed.
-            </p>
-          </div>
-          <div class="step">
-            <div class="step-num">2</div>
-            <h3>Set the Scene</h3>
-            <p>
-              Tell GoStylens where you're going — work, a date, brunch, or
-              anywhere else.
-            </p>
-          </div>
-          <div class="step">
-            <div class="step-num">3</div>
-            <h3>Get Styled</h3>
-            <p>
-              Receive instant feedback, a style score, and tips to look your
-              absolute best.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta-section">
-      <div class="cta-box">
-        <h2>Ready to Level Up<br />Your Style?</h2>
-        <p>Download GoStylens and never second-guess an outfit again.</p>
-        <div class="store-buttons">
-          <a href="#" class="store-btn">
-            <svg viewBox="0 0 24 24" style="width: 24px; height: 24px">
-              <path
-                d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
-              />
-            </svg>
-            <div class="store-label">
-              <span>Download on the</span><strong>App Store</strong>
-            </div>
-          </a>
-          <a href="#" class="store-btn">
-            <svg viewBox="0 0 24 24" style="width: 24px; height: 24px">
-              <path
-                d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.807 1.626a1 1 0 010 1.732l-2.807 1.627L15.206 12l2.492-2.492zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"
-              />
-            </svg>
-            <div class="store-label">
-              <span>Get it on</span><strong>Google Play</strong>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <div class="social-links">
-        <a
-          href="https://www.tiktok.com/@gostylens"
-          target="_blank"
-          aria-label="TikTok"
-        >
-          <svg viewBox="0 0 24 24">
+  <section class="cta-section">
+    <div class="cta-box">
+      <h2>Ready to Level Up<br />Your Style?</h2>
+      <p>Download GoStylens and never second-guess an outfit again.</p>
+      <div class="store-buttons">
+        <a href="#" class="store-btn">
+          <svg viewBox="0 0 24 24" style="width: 24px; height: 24px">
             <path
-              d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"
-            />
+              d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
           </svg>
+          <div class="store-label">
+            <span>Download on the</span><strong>App Store</strong>
+          </div>
         </a>
-        <a href="https://x.com/go_stylens" target="_blank" aria-label="X">
-          <svg viewBox="0 0 24 24">
+        <a href="#" class="store-btn">
+          <svg viewBox="0 0 24 24" style="width: 24px; height: 24px">
             <path
-              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-            />
+              d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.807 1.626a1 1 0 010 1.732l-2.807 1.627L15.206 12l2.492-2.492zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z" />
           </svg>
-        </a>
-        <a
-          href="https://www.instagram.com/gostylens"
-          target="_blank"
-          aria-label="Instagram"
-        >
-          <svg viewBox="0 0 24 24">
-            <path
-              d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"
-            />
-          </svg>
+          <div class="store-label">
+            <span>Get it on</span><strong>Google Play</strong>
+          </div>
         </a>
       </div>
-      <div class="footer-links">
-        <a href="/privacy.html">Privacy Policy</a>
-        <span class="footer-divider">·</span>
-        <a href="/terms.html">Terms & Conditions</a>
-      </div>
-      <p>© 2026 GoStylens. All rights reserved. Your style, elevated.</p>
-    </footer>
+    </div>
+  </section>
 
-    <script type="application/ld+json">
+  <footer>
+    <div class="social-links">
+      <a href="https://www.tiktok.com/@gostylens" target="_blank" aria-label="TikTok">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z" />
+        </svg>
+      </a>
+      <a href="https://x.com/go_stylens" target="_blank" aria-label="X">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        </svg>
+      </a>
+      <a href="https://www.instagram.com/gostylens" target="_blank" aria-label="Instagram">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+        </svg>
+      </a>
+    </div>
+    <div class="footer-links">
+      <a href="/privacy.html">Privacy Policy</a>
+      <span class="footer-divider">·</span>
+      <a href="/terms.html">Terms & Conditions</a>
+    </div>
+    <p>© 2026 GoStylens. All rights reserved. Your style, elevated.</p>
+  </footer>
+
+  <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
@@ -1535,105 +1647,106 @@
       }
     </script>
 
-    <script>
-      const phones = [
-        document.getElementById("phone0"),
-        document.getElementById("phone1"),
-        document.getElementById("phone2"),
-        document.getElementById("phone3"),
-        document.getElementById("phone4"),
-      ];
-      const dots = document.querySelectorAll(".dot");
-      const positions = [
-        "hidden-left",
-        "left",
-        "center",
-        "right",
-        "hidden-right",
-      ];
-      let current = 0;
-      let autoTimer;
+  <script>
+    const phones = [
+      document.getElementById("phone0"),
+      document.getElementById("phone1"),
+      document.getElementById("phone2"),
+      document.getElementById("phone3"),
+      document.getElementById("phone4"),
+    ];
+    const dots = document.querySelectorAll(".dot");
+    const positions = [
+      "hidden-left",
+      "left",
+      "center",
+      "right",
+      "hidden-right",
+    ];
+    let current = 0;
+    let autoTimer;
 
-      function updateSlider() {
-        phones.forEach((p, i) => {
-          p.className = "phone";
-          let offset = i - current;
-          if (offset < -2) offset += 5;
-          if (offset > 2) offset -= 5;
-          const posIndex = offset + 2;
-          if (posIndex >= 0 && posIndex < positions.length) {
-            p.classList.add(positions[posIndex]);
-          } else {
-            p.classList.add("hidden-left");
-          }
-        });
-        dots.forEach((d, i) => d.classList.toggle("active", i === current));
-      }
+    function updateSlider() {
+      phones.forEach((p, i) => {
+        p.className = "phone";
+        let offset = i - current;
+        if (offset < -2) offset += 5;
+        if (offset > 2) offset -= 5;
+        const posIndex = offset + 2;
+        if (posIndex >= 0 && posIndex < positions.length) {
+          p.classList.add(positions[posIndex]);
+        } else {
+          p.classList.add("hidden-left");
+        }
+      });
+      dots.forEach((d, i) => d.classList.toggle("active", i === current));
+    }
 
-      function goTo(index) {
-        current = index;
+    function goTo(index) {
+      current = index;
+      updateSlider();
+      resetAuto();
+    }
+
+    function next() {
+      current = (current + 1) % 5;
+      updateSlider();
+    }
+
+    function resetAuto() {
+      clearInterval(autoTimer);
+      autoTimer = setInterval(next, 3500);
+    }
+
+    updateSlider();
+    resetAuto();
+
+    let startX = 0;
+    const slider = document.getElementById("phoneSlider");
+    slider.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+    });
+    slider.addEventListener("touchend", (e) => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          current = (current + 1) % 5;
+        } else {
+          current = (current - 1 + 5) % 5;
+        }
         updateSlider();
         resetAuto();
       }
+    });
 
-      function next() {
-        current = (current + 1) % 5;
-        updateSlider();
-      }
-
-      function resetAuto() {
-        clearInterval(autoTimer);
-        autoTimer = setInterval(next, 3500);
-      }
-
-      updateSlider();
-      resetAuto();
-
-      let startX = 0;
-      const slider = document.getElementById("phoneSlider");
-      slider.addEventListener("touchstart", (e) => {
-        startX = e.touches[0].clientX;
+    const navToggle = document.querySelector(".nav-toggle");
+    const mobileMenu = document.querySelector(".mobile-menu");
+    if (navToggle && mobileMenu) {
+      navToggle.addEventListener("click", () => {
+        const isOpen = mobileMenu.classList.toggle("open");
+        navToggle.classList.toggle("open", isOpen);
+        navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
       });
-      slider.addEventListener("touchend", (e) => {
-        const diff = startX - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 50) {
-          if (diff > 0) {
-            current = (current + 1) % 5;
-          } else {
-            current = (current - 1 + 5) % 5;
-          }
-          updateSlider();
-          resetAuto();
-        }
-      });
-
-      const navToggle = document.querySelector(".nav-toggle");
-      const mobileMenu = document.querySelector(".mobile-menu");
-      if (navToggle && mobileMenu) {
-        navToggle.addEventListener("click", () => {
-          const isOpen = mobileMenu.classList.toggle("open");
-          navToggle.classList.toggle("open", isOpen);
-          navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.remove("open");
+          navToggle.classList.remove("open");
+          navToggle.setAttribute("aria-expanded", "false");
         });
-        mobileMenu.querySelectorAll("a").forEach((link) => {
-          link.addEventListener("click", () => {
-            mobileMenu.classList.remove("open");
-            navToggle.classList.remove("open");
-            navToggle.setAttribute("aria-expanded", "false");
-          });
-        });
-      }
-
-      const nav = document.querySelector("nav");
-      function updateNavTransparency() {
-        if (!nav) return;
-        nav.classList.toggle("scrolled", window.scrollY > 20);
-      }
-      updateNavTransparency();
-      window.addEventListener("scroll", updateNavTransparency, {
-        passive: true,
       });
-    </script>
-    <script src="scripts/modal.js"></script>
-  </body>
+    }
+
+    const nav = document.querySelector("nav");
+    function updateNavTransparency() {
+      if (!nav) return;
+      nav.classList.toggle("scrolled", window.scrollY > 20);
+    }
+    updateNavTransparency();
+    window.addEventListener("scroll", updateNavTransparency, {
+      passive: true,
+    });
+  </script>
+  <script src="scripts/modal.js"></script>
+</body>
+
 </html>
