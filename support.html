@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles/legal.css" />
+  <title>GoStylens - Support</title>
+  <style>
+    .support-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 24px;
+      background: var(--cta);
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+      box-shadow: 0 8px 20px rgba(var(--ink-rgb), 0.12);
+      margin-top: 8px;
+    }
+
+    .support-btn:hover {
+      background: var(--cta-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(var(--ink-rgb), 0.2);
+      color: #ffffff;
+    }
+
+    .support-btn:active {
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="nav-wrapper">
+    <nav>
+      <a class="logo" href="/">
+        <img src="/assets/logo_primary.png" alt="GoStylens Logo" class="nav-logo-img" />
+      </a>
+      <a class="back-home" href="/">Back to Home</a>
+    </nav>
+  </div>
+  <div class="container">
+    <h1>Support</h1>
+    <div class="updated">Last updated: April 22, 2026</div>
+
+    <div class="section">
+      <p>
+        Welcome to GoStylens Support. We're here to help you make the most of your personal AI stylist.
+        Whether you have a question about your account, need help with a styling session, or want to
+        share feedback, our team is ready to assist.
+      </p>
+    </div>
+
+    <h2>How to Contact Us</h2>
+    <p>
+      The quickest way to get help is via email. We aim to respond to all inquiries within 24-48 hours.
+    </p>
+    <p>
+      For any billing, subscription, refund, or account-related questions, please contact us at
+      <a href="mailto:support@gostylens.com"
+        style="color: var(--cta); text-decoration: none;">support@gostylens.com</a>.
+    </p>
+    <a href="mailto:support@gostylens.com" class="support-btn">Email Support</a>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <h3>How do I sign in?</h3>
+    <p>
+      GoStylens uses passwordless authentication. To sign in, simply enter your email address
+      in the app, and we'll send you a one-time verification code (OTP). You can also sign in
+      instantly using your Google or Apple account.
+    </p>
+
+    <h3>How do I cancel my subscription?</h3>
+    <p>
+      GoStylens subscriptions are managed through the Apple App Store or Google Play Store.
+      To cancel, please open your device's subscription settings and follow the standard
+      cancellation process for your platform.
+    </p>
+
+    <h3>Is my data private?</h3>
+    <p>
+      Yes, your privacy is our priority. Your photos and style data are encrypted and used
+      only to provide personalized style recommendations. For more details, please review our
+      <a href="/privacy.html" style="color: var(--cta); text-decoration: none;">Privacy Policy</a>.
+    </p>
+
+    <h2>App Store Support</h2>
+    <p>
+      If you are experiencing technical issues with the GoStylens mobile app, please ensure
+      you are running the latest version. If the problem persists, please email us with
+      your device model and a brief description of the issue.
+    </p>
+
+    <div class="section" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border);">
+      <p style="font-size: 14px;">
+        GoStylens is a product of Stylens Lab LLC.
+        169 Madison Avenue, New York, NY 10016, USA.
+      </p>
+    </div>
+  </div>
+  <script>
+    window.scrollTo(0, 0);
+
+    // Function to get query parameter value
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    // Hide nav and reduce top padding if ?hideNav=true
+    const hideNav = getQueryParam("hideNav");
+    const navWrapper = document.querySelector(".nav-wrapper");
+    if (hideNav === "true") {
+      if (navWrapper) navWrapper.style.display = "none";
+      document.body.style.paddingTop = "30px"; // Reduced padding
+    } else {
+      if (navWrapper) navWrapper.style.display = "";
+      document.body.style.paddingTop = ""; // Default (from CSS)
+    }
+  </script>
+</body>
+
+</html>
