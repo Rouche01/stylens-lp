@@ -348,7 +348,7 @@
       position: relative;
       width: 100%;
       max-width: 900px;
-      height: 620px;
+      height: 660px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -357,50 +357,30 @@
 
     .phone {
       position: absolute;
-      width: 300px;
-      height: 600px;
-      border-radius: 32px;
-      background: var(--card);
-      border: 2px solid rgba(var(--accent-rgb), 0.25);
+      box-sizing: border-box;
+      width: 290px;
+      height: 630px;
+      padding: 7px;
+      border-radius: 44px;
+      background: linear-gradient(160deg, #3a3d3a 0%, #1a1c1a 45%, #0d0e0d 100%);
+      border: 1px solid rgba(var(--ink-rgb), 0.45);
       overflow: hidden;
       transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 25px 60px rgba(var(--ink-rgb), 0.18);
+      box-shadow:
+        0 2px 4px rgba(var(--ink-rgb), 0.12),
+        0 16px 36px rgba(var(--ink-rgb), 0.16),
+        0 36px 72px rgba(var(--ink-rgb), 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.06);
     }
 
-    .phone .notch {
-      position: absolute;
-      top: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 24px;
-      background: var(--bg-deep);
-      border-radius: 14px;
-      z-index: 5;
-    }
-
-    .phone .screen {
+    .phone img {
+      display: block;
       width: 100%;
       height: 100%;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .phone .status-bar {
-      padding: 12px 16px 4px;
-      display: flex;
-      justify-content: space-between;
-      font-size: 10px;
-      color: var(--primary);
-      font-weight: 600;
-    }
-
-    .phone .screen-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      padding: 20px 14px 14px;
+      border-radius: 36px;
+      object-fit: cover;
+      object-position: top center;
     }
 
     .phone.left {
@@ -408,12 +388,24 @@
       z-index: 1;
       opacity: 0.75;
       filter: brightness(0.82);
+      box-shadow:
+        0 2px 3px rgba(var(--ink-rgb), 0.1),
+        0 12px 28px rgba(var(--ink-rgb), 0.12),
+        0 28px 56px rgba(var(--ink-rgb), 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.04);
     }
 
     .phone.center {
       transform: translateX(0) perspective(800px) rotateY(0deg) scale(1);
       z-index: 3;
       opacity: 1;
+      box-shadow:
+        0 4px 8px rgba(var(--ink-rgb), 0.14),
+        0 22px 48px rgba(var(--ink-rgb), 0.2),
+        0 48px 96px rgba(var(--ink-rgb), 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.08);
     }
 
     .phone.right {
@@ -421,220 +413,12 @@
       z-index: 1;
       opacity: 0.75;
       filter: brightness(0.82);
-    }
-
-    .phone.hidden-left {
-      transform: translateX(-440px) perspective(800px) rotateY(45deg) scale(0.65);
-      z-index: 0;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .phone.hidden-right {
-      transform: translateX(440px) perspective(800px) rotateY(-45deg) scale(0.65);
-      z-index: 0;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .screen-1 {
-      background: linear-gradient(180deg,
-          var(--bg-alt) 0%,
-          var(--bg-deep) 100%);
-    }
-
-    .screen-2 {
-      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
-    }
-
-    .screen-3 {
-      background: linear-gradient(180deg,
-          var(--bg-alt) 0%,
-          var(--bg-deep) 100%);
-    }
-
-    .screen-4 {
-      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
-    }
-
-    .screen-5 {
-      background: linear-gradient(180deg,
-          var(--bg-alt) 0%,
-          var(--bg-deep) 100%);
-    }
-
-    .screen-title {
-      font-family: var(--font-display);
-      font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 8px;
-      color: var(--primary);
-    }
-
-    .screen-subtitle {
-      font-size: 9px;
-      color: var(--muted);
-      margin-bottom: 14px;
-      line-height: 1.4;
-    }
-
-    .selfie-box {
-      flex: 1;
-      border-radius: 16px;
-      overflow: hidden;
-      position: relative;
-      background: linear-gradient(135deg, var(--bg-alt), var(--bg-deep));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .selfie-silhouette {
-      width: 70px;
-      height: 120px;
-      border-radius: 50% 50% 45% 45%;
-      background: rgba(var(--accent-rgb), 0.1);
-      border: 2px dashed rgba(var(--accent-rgb), 0.3);
-      position: relative;
-    }
-
-    .selfie-silhouette::before {
-      content: "";
-      position: absolute;
-      top: -25px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: rgba(var(--accent-rgb), 0.1);
-      border: 2px dashed rgba(var(--accent-rgb), 0.3);
-    }
-
-    .cam-btn {
-      position: absolute;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: 3px solid var(--secondary);
-      background: rgba(var(--accent-rgb), 0.2);
-    }
-
-    .event-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 12px;
-    }
-
-    .chip {
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 9px;
-      font-weight: 600;
-      background: var(--accent-soft);
-      color: var(--secondary-deep);
-      border: 1px solid rgba(var(--accent-rgb), 0.25);
-    }
-
-    .chip.active {
-      background: var(--cta);
-      color: #ffffff;
-      border-color: transparent;
-      font-weight: 700;
-    }
-
-    .feedback-card {
-      background: var(--card);
-      border-radius: 12px;
-      padding: 10px;
-      margin-bottom: 8px;
-      border: 1px solid var(--border);
-    }
-
-    .score-bar {
-      height: 6px;
-      border-radius: 3px;
-      background: var(--accent-soft);
-      margin-top: 6px;
-    }
-
-    .score-fill {
-      height: 100%;
-      border-radius: 3px;
-      background: linear-gradient(90deg,
-          var(--secondary-deep),
-          var(--secondary));
-    }
-
-    .score-label {
-      font-size: 9px;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-
-    .outfit-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      flex: 1;
-    }
-
-    .outfit-item {
-      border-radius: 12px;
-      aspect-ratio: 0.75;
-      background: var(--bg-alt);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .outfit-item .hanger {
-      font-size: 28px;
-      opacity: 0.5;
-    }
-
-    .outfit-item .heart {
-      position: absolute;
-      top: 6px;
-      right: 6px;
-      font-size: 10px;
-    }
-
-    .tip-item {
-      display: flex;
-      gap: 8px;
-      align-items: flex-start;
-      margin-bottom: 10px;
-      background: var(--bg-alt);
-      border-radius: 10px;
-      padding: 8px;
-    }
-
-    .tip-icon {
-      width: 24px;
-      height: 24px;
-      border-radius: 8px;
-      flex-shrink: 0;
-      background: linear-gradient(135deg,
-          rgba(var(--accent-rgb), 0.2),
-          rgba(var(--accent-rgb), 0.12));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-    }
-
-    .tip-text {
-      font-size: 9px;
-      color: var(--muted);
-      line-height: 1.4;
+      box-shadow:
+        0 2px 3px rgba(var(--ink-rgb), 0.1),
+        0 12px 28px rgba(var(--ink-rgb), 0.12),
+        0 28px 56px rgba(var(--ink-rgb), 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.04);
     }
 
     /* Slider dots */
@@ -1141,8 +925,8 @@
       }
 
       .phone-slider {
-        transform: scale(0.9);
-        height: 600px;
+        transform: scale(0.85);
+        height: 580px;
       }
 
       .phone.left {
@@ -1151,14 +935,6 @@
 
       .phone.right {
         transform: translateX(275px) perspective(800px) rotateY(-30deg) scale(0.88);
-      }
-
-      .phone.hidden-left {
-        transform: translateX(-420px) perspective(800px) rotateY(45deg) scale(0.65);
-      }
-
-      .phone.hidden-right {
-        transform: translateX(420px) perspective(800px) rotateY(-45deg) scale(0.65);
       }
 
       nav {
@@ -1240,208 +1016,33 @@
     </p>
     <div class="phone-slider" id="phoneSlider">
       <div class="phone" id="phone0">
-        <div class="notch"></div>
-        <div class="screen screen-1">
-          <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
-          <div class="screen-content">
-            <div class="screen-title">📸 Take a Selfie</div>
-            <div class="screen-subtitle">
-              Snap a mirror pic and let GoStylens analyze your outfit
-            </div>
-            <div class="selfie-box">
-              <div class="selfie-silhouette"></div>
-              <div class="cam-btn"></div>
-            </div>
-          </div>
-        </div>
+        <img
+          src="assets/screenshot-capture.png"
+          alt="GoStylens Capture — Strike a Pose and take a photo of your outfit"
+          width="290"
+          height="630"
+          loading="eager"
+        />
       </div>
 
       <div class="phone" id="phone1">
-        <div class="notch"></div>
-        <div class="screen screen-2">
-          <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
-          <div class="screen-content">
-            <div class="screen-title">🎯 Where are you going?</div>
-            <div class="screen-subtitle">
-              Select your occasion for personalized feedback
-            </div>
-            <div class="event-chips">
-              <div class="chip">💼 Work</div>
-              <div class="chip active">🥂 Date Night</div>
-              <div class="chip">💒 Wedding</div>
-              <div class="chip">🏖️ Casual</div>
-              <div class="chip">🎉 Party</div>
-              <div class="chip">🏋️ Gym</div>
-              <div class="chip">☕ Brunch</div>
-              <div class="chip">🎓 Interview</div>
-            </div>
-            <div class="feedback-card" style="margin-top: auto">
-              <div style="
-                    font-size: 10px;
-                    font-weight: 600;
-                    color: var(--secondary);
-                  ">
-                Selected: Date Night
-              </div>
-              <div style="font-size: 9px; color: var(--muted); margin-top: 4px">
-                Smart casual to semi-formal recommended
-              </div>
-            </div>
-          </div>
-        </div>
+        <img
+          src="assets/screenshot-style-chat.png"
+          alt="GoStylens Style Chat — AI outfit feedback for the office"
+          width="290"
+          height="630"
+          loading="eager"
+        />
       </div>
 
       <div class="phone" id="phone2">
-        <div class="notch"></div>
-        <div class="screen screen-3">
-          <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
-          <div class="screen-content">
-            <div class="screen-title">✨ Style Score</div>
-            <div class="screen-subtitle">AI-powered outfit feedback</div>
-            <div class="feedback-card">
-              <div style="
-                    font-family: var(--font-display);
-                    font-size: 20px;
-                    font-weight: 800;
-                    color: var(--secondary);
-                  ">
-                8.5<span style="font-size: 12px; color: var(--muted)">/10</span>
-              </div>
-              <div class="score-bar">
-                <div class="score-fill" style="width: 85%"></div>
-              </div>
-              <div class="score-label">Outfit Match for Date Night</div>
-            </div>
-            <div class="feedback-card">
-              <div style="
-                    font-size: 10px;
-                    font-weight: 600;
-                    color: var(--primary);
-                  ">
-                💡 Quick Tips
-              </div>
-              <div style="
-                    font-size: 9px;
-                    color: var(--muted);
-                    margin-top: 4px;
-                    line-height: 1.5;
-                  ">
-                • Swap sneakers for loafers (+1.0)<br />• Add a watch for a
-                polished look<br />• Colors work great together ✓
-              </div>
-            </div>
-            <div class="feedback-card" style="margin-top: auto">
-              <div style="
-                    font-size: 10px;
-                    font-weight: 600;
-                    color: var(--secondary);
-                  ">
-                🔥 Confidence Boost
-              </div>
-              <div style="font-size: 9px; color: var(--muted); margin-top: 3px">
-                "You'll turn heads tonight!"
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="phone" id="phone3">
-        <div class="notch"></div>
-        <div class="screen screen-4">
-          <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
-          <div class="screen-content">
-            <div class="screen-title">👗 My Wardrobe</div>
-            <div class="screen-subtitle">
-              Your saved outfits & style history
-            </div>
-            <div class="outfit-grid">
-              <div class="outfit-item">
-                <span class="hanger">👔</span><span class="heart">💚</span>
-              </div>
-              <div class="outfit-item">
-                <span class="hanger">👗</span><span class="heart">🤍</span>
-              </div>
-              <div class="outfit-item">
-                <span class="hanger">🧥</span><span class="heart">💚</span>
-              </div>
-              <div class="outfit-item">
-                <span class="hanger">👕</span><span class="heart">🤍</span>
-              </div>
-            </div>
-            <div style="
-                  font-size: 9px;
-                  color: var(--muted);
-                  text-align: center;
-                  margin-top: 10px;
-                ">
-              12 outfits saved • 4 favorites
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="phone" id="phone4">
-        <div class="notch"></div>
-        <div class="screen screen-5">
-          <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
-          <div class="screen-content">
-            <div class="screen-title">🧠 Smart Suggestions</div>
-            <div class="screen-subtitle">Based on your style profile</div>
-            <div class="tip-item">
-              <div class="tip-icon">👖</div>
-              <div>
-                <div style="
-                      font-size: 10px;
-                      font-weight: 600;
-                      color: var(--primary);
-                    ">
-                  Dark Slim Jeans
-                </div>
-                <div class="tip-text">
-                  Pairs perfectly with 6 of your saved tops
-                </div>
-              </div>
-            </div>
-            <div class="tip-item">
-              <div class="tip-icon">🧣</div>
-              <div>
-                <div style="
-                      font-size: 10px;
-                      font-weight: 600;
-                      color: var(--primary);
-                    ">
-                  Neutral Scarf
-                </div>
-                <div class="tip-text">
-                  Adds versatility to your fall wardrobe
-                </div>
-              </div>
-            </div>
-            <div class="tip-item">
-              <div class="tip-icon">👟</div>
-              <div>
-                <div style="
-                      font-size: 10px;
-                      font-weight: 600;
-                      color: var(--primary);
-                    ">
-                  White Minimalist Sneakers
-                </div>
-                <div class="tip-text">Matches 80% of your casual outfits</div>
-              </div>
-            </div>
-            <div class="feedback-card" style="margin-top: auto; text-align: center">
-              <div style="
-                    font-size: 10px;
-                    font-weight: 600;
-                    color: var(--secondary);
-                  ">
-                🎯 Style DNA: Modern Minimal
-              </div>
-            </div>
-          </div>
-        </div>
+        <img
+          src="assets/screenshot-history.png"
+          alt="GoStylens History — saved outfit style reviews"
+          width="290"
+          height="630"
+          loading="eager"
+        />
       </div>
     </div>
 
@@ -1449,8 +1050,6 @@
       <div class="dot active" onclick="goTo(0)"></div>
       <div class="dot" onclick="goTo(1)"></div>
       <div class="dot" onclick="goTo(2)"></div>
-      <div class="dot" onclick="goTo(3)"></div>
-      <div class="dot" onclick="goTo(4)"></div>
     </div>
 
     <div class="hero-text">
@@ -1631,7 +1230,7 @@
       <span class="footer-divider">·</span>
       <a href="/support.html">Support</a>
     </div>
-    <p>© 2026 GoStylens. All rights reserved. Your style, elevated.</p>
+    <p>© 2026 Stylens Lab LLC. All rights reserved. Your style, elevated.</p>
   </footer>
 
   <script type="application/ld+json">
@@ -1656,17 +1255,14 @@
       document.getElementById("phone0"),
       document.getElementById("phone1"),
       document.getElementById("phone2"),
-      document.getElementById("phone3"),
-      document.getElementById("phone4"),
     ];
+    const phoneCount = phones.length;
     const dots = document.querySelectorAll(".dot");
-    const positions = [
-      "hidden-left",
-      "left",
-      "center",
-      "right",
-      "hidden-right",
-    ];
+    const positionByOffset = {
+      "-1": "left",
+      0: "center",
+      1: "right",
+    };
     let current = 0;
     let autoTimer;
 
@@ -1674,14 +1270,9 @@
       phones.forEach((p, i) => {
         p.className = "phone";
         let offset = i - current;
-        if (offset < -2) offset += 5;
-        if (offset > 2) offset -= 5;
-        const posIndex = offset + 2;
-        if (posIndex >= 0 && posIndex < positions.length) {
-          p.classList.add(positions[posIndex]);
-        } else {
-          p.classList.add("hidden-left");
-        }
+        if (offset < -1) offset += phoneCount;
+        if (offset > 1) offset -= phoneCount;
+        p.classList.add(positionByOffset[offset] || "center");
       });
       dots.forEach((d, i) => d.classList.toggle("active", i === current));
     }
@@ -1693,7 +1284,7 @@
     }
 
     function next() {
-      current = (current + 1) % 5;
+      current = (current + 1) % phoneCount;
       updateSlider();
     }
 
@@ -1714,9 +1305,9 @@
       const diff = startX - e.changedTouches[0].clientX;
       if (Math.abs(diff) > 50) {
         if (diff > 0) {
-          current = (current + 1) % 5;
+          current = (current + 1) % phoneCount;
         } else {
-          current = (current - 1 + 5) % 5;
+          current = (current - 1 + phoneCount) % phoneCount;
         }
         updateSlider();
         resetAuto();
