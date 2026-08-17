@@ -55,44 +55,50 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 16px;
+      padding: 20px 20px 0;
+      pointer-events: none;
+    }
+
+    .nav-wrapper > * {
+      pointer-events: auto;
     }
 
     nav {
       width: 100%;
-      max-width: 1100px;
-      padding: 14px 32px;
+      max-width: 1040px;
+      padding: 14px 28px;
       display: grid;
       grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      background: rgba(var(--surface-rgb), 0.25);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid transparent;
-      border-image: linear-gradient(to bottom right,
-          rgba(255, 255, 255, 0.8),
-          rgba(255, 255, 255, 0.1)) 1;
-      border-radius: 16px;
+      background: rgba(var(--surface-rgb), 0.42);
+      backdrop-filter: blur(28px) saturate(1.35);
+      -webkit-backdrop-filter: blur(28px) saturate(1.35);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 20px;
       position: relative;
-      box-shadow: 0 8px 32px 0 rgba(var(--ink-rgb), 0.08);
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.65) inset,
+        0 10px 28px rgba(var(--ink-rgb), 0.1),
+        0 28px 56px rgba(var(--ink-rgb), 0.12);
       transition:
         background 0.3s,
         border-color 0.3s,
-        box-shadow 0.3s;
+        box-shadow 0.3s,
+        transform 0.3s;
     }
 
     nav::before {
       content: "";
       position: absolute;
       inset: -1px;
-      border-radius: 16px;
+      border-radius: 20px;
       padding: 1px;
       background: linear-gradient(135deg,
           var(--secondary) 0%,
           #e9c46a 33%,
           var(--cta) 66%,
           #2a9d8f 100%);
-      opacity: 0.5;
+      opacity: 0.55;
       -webkit-mask:
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
@@ -105,8 +111,12 @@
     }
 
     nav.scrolled {
-      background: rgba(var(--surface-rgb), 0.45);
-      box-shadow: 0 10px 30px rgba(var(--ink-rgb), 0.12);
+      background: rgba(var(--surface-rgb), 0.62);
+      border-color: rgba(255, 255, 255, 0.7);
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.7) inset,
+        0 12px 32px rgba(var(--ink-rgb), 0.14),
+        0 32px 64px rgba(var(--ink-rgb), 0.16);
     }
 
     .nav-left {
@@ -365,7 +375,11 @@
       background: linear-gradient(160deg, #3a3d3a 0%, #1a1c1a 45%, #0d0e0d 100%);
       border: 1px solid rgba(var(--ink-rgb), 0.45);
       overflow: hidden;
-      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transition:
+        transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.55s ease,
+        box-shadow 0.55s ease;
       box-shadow:
         0 2px 4px rgba(var(--ink-rgb), 0.12),
         0 16px 36px rgba(var(--ink-rgb), 0.16),
@@ -384,7 +398,7 @@
     }
 
     .phone.left {
-      transform: translateX(-290px) perspective(800px) rotateY(30deg) scale(0.88);
+      transform: translateX(-275px) perspective(800px) rotateY(28deg) scale(0.88);
       z-index: 1;
       opacity: 0.75;
       filter: brightness(0.82);
@@ -409,7 +423,7 @@
     }
 
     .phone.right {
-      transform: translateX(290px) perspective(800px) rotateY(-30deg) scale(0.88);
+      transform: translateX(275px) perspective(800px) rotateY(-28deg) scale(0.88);
       z-index: 1;
       opacity: 0.75;
       filter: brightness(0.82);
@@ -419,6 +433,48 @@
         0 28px 56px rgba(var(--ink-rgb), 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.12),
         inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+    }
+
+    /* Entrance: center appears, then sides emerge from behind it */
+    .phone-slider:not(.is-ready) .phone.left {
+      opacity: 0;
+      z-index: 1;
+      transform: translateX(-8px) perspective(800px) rotateY(10deg) scale(0.86);
+      filter: brightness(0.82);
+    }
+
+    .phone-slider:not(.is-ready) .phone.center {
+      opacity: 0;
+      z-index: 3;
+      transform: translateX(0) perspective(800px) rotateY(0deg) scale(0.96);
+    }
+
+    .phone-slider:not(.is-ready) .phone.right {
+      opacity: 0;
+      z-index: 1;
+      transform: translateX(8px) perspective(800px) rotateY(-10deg) scale(0.86);
+      filter: brightness(0.82);
+    }
+
+    .phone-slider.is-entering .phone.center {
+      transition-delay: 0.05s;
+    }
+
+    .phone-slider.is-entering .phone.left,
+    .phone-slider.is-entering .phone.right {
+      transition-delay: 0.32s;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .phone {
+        transition-duration: 0.01ms;
+      }
+
+      .phone-slider.is-entering .phone.center,
+      .phone-slider.is-entering .phone.left,
+      .phone-slider.is-entering .phone.right {
+        transition-delay: 0s;
+      }
     }
 
     /* Slider dots */
@@ -896,6 +952,10 @@
     }
 
     @media (max-width: 768px) {
+      .nav-wrapper {
+        padding: 14px 14px 0;
+      }
+
       .features-grid {
         grid-template-columns: 1fr;
       }
@@ -905,7 +965,8 @@
       }
 
       .hero {
-        padding-top: 110px;
+        padding: 132px 0 48px;
+        overflow-x: clip;
       }
 
       .hero-card {
@@ -916,25 +977,78 @@
       .slider-heading {
         font-size: 32px;
         margin-bottom: 8px;
+        padding: 0 24px;
       }
 
       .slider-subheading {
         font-size: 16px;
-        margin-bottom: 0px;
-        padding: 0 20px;
+        margin-bottom: 12px;
+        padding: 0 24px;
       }
 
       .phone-slider {
-        transform: scale(0.85);
-        height: 580px;
+        width: 100vw;
+        max-width: none;
+        height: calc(min(65vw, 280px) * 630 / 290 + 24px);
+        margin: 16px 0 28px;
+        overflow: visible;
+        perspective: 900px;
+        perspective-origin: 50% 45%;
       }
 
+      .phone {
+        width: min(65vw, 280px);
+        height: calc(min(65vw, 280px) * 630 / 290);
+        padding: 6px;
+        border-radius: 36px;
+        transform-style: preserve-3d;
+      }
+
+      .phone img {
+        border-radius: 30px;
+      }
+
+      /* Coverflow depth — side phones angle like real devices */
       .phone.left {
-        transform: translateX(-275px) perspective(800px) rotateY(30deg) scale(0.88);
+        transform: translateX(-58vw) translateZ(-80px) rotateY(32deg) scale(0.9);
+        opacity: 0.72;
+        filter: brightness(0.85);
+      }
+
+      .phone.center {
+        transform: translateX(0) translateZ(48px) rotateY(0deg) scale(1);
       }
 
       .phone.right {
-        transform: translateX(275px) perspective(800px) rotateY(-30deg) scale(0.88);
+        transform: translateX(58vw) translateZ(-80px) rotateY(-32deg) scale(0.9);
+        opacity: 0.72;
+        filter: brightness(0.85);
+      }
+
+      .phone-slider:not(.is-ready) .phone.left {
+        opacity: 0;
+        z-index: 1;
+        transform: translateX(-6px) translateZ(-140px) rotateY(12deg) scale(0.88);
+      }
+
+      .phone-slider:not(.is-ready) .phone.center {
+        opacity: 0;
+        z-index: 3;
+        transform: translateX(0) translateZ(24px) rotateY(0deg) scale(0.96);
+      }
+
+      .phone-slider:not(.is-ready) .phone.right {
+        opacity: 0;
+        z-index: 1;
+        transform: translateX(6px) translateZ(-140px) rotateY(-12deg) scale(0.88);
+      }
+
+      .slider-dots {
+        margin-bottom: 56px;
+      }
+
+      .hero-text {
+        padding: 8px 24px 0;
       }
 
       nav {
@@ -1293,11 +1407,30 @@
       autoTimer = setInterval(next, 3500);
     }
 
+    const slider = document.getElementById("phoneSlider");
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
     updateSlider();
-    resetAuto();
+
+    if (reduceMotion) {
+      slider.classList.add("is-ready");
+      resetAuto();
+    } else {
+      slider.classList.add("is-entering");
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          slider.classList.add("is-ready");
+          window.setTimeout(() => {
+            slider.classList.remove("is-entering");
+            resetAuto();
+          }, 700);
+        });
+      });
+    }
 
     let startX = 0;
-    const slider = document.getElementById("phoneSlider");
     slider.addEventListener("touchstart", (e) => {
       startX = e.touches[0].clientX;
     });
