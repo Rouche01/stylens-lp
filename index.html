@@ -20,6 +20,34 @@
   <meta property="og:url" content="https://gostylens.app/" />
   <meta property="og:type" content="website" />
 
+  <!-- Smart store redirect for QR / share links (?download=1) -->
+  <script>
+    (function () {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        if (params.get("download") !== "1" && params.get("get") !== "1") return;
+
+        var APP_STORE_URL = "https://apps.apple.com/app/gostylens/id6760427902";
+        var PLAY_STORE_URL =
+          "https://play.google.com/store/apps/details?id=com.gostylens";
+        var ua = navigator.userAgent || "";
+        var isIOS =
+          /iPhone|iPad|iPod/i.test(ua) ||
+          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+        var isAndroid = /Android/i.test(ua);
+
+        if (isIOS) {
+          window.location.replace(APP_STORE_URL);
+          return;
+        }
+        if (isAndroid) {
+          window.location.replace(PLAY_STORE_URL);
+        }
+        // Desktop: modal.js opens the store chooser after load
+      } catch (e) {}
+    })();
+  </script>
+
   <style>
     body {
       font-family: var(--font-body);

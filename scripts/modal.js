@@ -1,8 +1,21 @@
 // App download modal: QR code on desktop, store redirect on mobile
 (function () {
-  const APP_STORE_URL = "https://apps.apple.com/app/gostylens";
+  const APP_STORE_URL = "https://apps.apple.com/app/gostylens/id6760427902";
   const PLAY_STORE_URL =
     "https://play.google.com/store/apps/details?id=com.gostylens";
+  const DOWNLOAD_QR_URL = "https://gostylens.app/get";
+
+  function isIOS() {
+    const ua = navigator.userAgent || "";
+    return (
+      /iPhone|iPad|iPod/i.test(ua) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+    );
+  }
+
+  function isAndroid() {
+    return /Android/i.test(navigator.userAgent || "");
+  }
 
   // Inject modal HTML
   const modalHTML = `
@@ -13,7 +26,7 @@
         <p>Scan the QR code with your phone to download GoStylens on the App Store or Google Play Store</p>
         <div class="modal-qr">
           <img
-            src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://gostylens.app"
+            src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(DOWNLOAD_QR_URL)}"
             alt="QR code to download GoStylens"
             width="180"
             height="180"
@@ -36,17 +49,26 @@
 
   const appModal = document.getElementById("appModal");
 
+  function openModal() {
+    appModal.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function routeToStoreOrModal() {
+    if (isIOS()) {
+      window.location.href = APP_STORE_URL;
+      return;
+    }
+    if (isAndroid()) {
+      window.location.href = PLAY_STORE_URL;
+      return;
+    }
+    openModal();
+  }
+
   function handleGetApp(e) {
     e.preventDefault();
-    const ua = navigator.userAgent;
-    if (/iPhone|iPad|iPod/i.test(ua)) {
-      window.location.href = APP_STORE_URL;
-    } else if (/Android/i.test(ua)) {
-      window.location.href = PLAY_STORE_URL;
-    } else {
-      appModal.classList.add("open");
-      document.body.style.overflow = "hidden";
-    }
+    routeToStoreOrModal();
   }
 
   function closeModal() {
@@ -54,17 +76,25 @@
     document.body.style.overflow = "";
   }
 
+  // QR / shared link landed on desktop — show store chooser
+  try {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("download") === "1" || params.get("get") === "1") {
+      if (!isIOS() && !isAndroid()) openModal();
+    }
+  } catch (e) {}
+
   // Attach to all download-intent CTAs (exclude store buttons inside the modal)
   document
-    .querySelectorAll(".nav-cta, .plan-cta, .cta-btn, .store-btn:not(.modal-stores .store-btn)")
+    .querySelectorAll(
+      ".nav-cta, .plan-cta, .cta-btn, .store-btn:not(.modal-stores .store-btn)",
+    )
     .forEach(function (btn) {
       btn.addEventListener("click", handleGetApp);
     });
 
   // Close modal
-  appModal
-    .querySelector(".modal-close")
-    .addEventListener("click", closeModal);
+  appModal.querySelector(".modal-close").addEventListener("click", closeModal);
   appModal.addEventListener("click", function (e) {
     if (e.target === appModal) closeModal();
   });
