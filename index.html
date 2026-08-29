@@ -608,14 +608,15 @@
       border: 1px solid transparent;
       text-decoration: none;
       transition:
-        transform 0.3s,
-        box-shadow 0.3s;
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background-color 0.25s ease;
       box-shadow: 0 14px 34px rgba(var(--ink-rgb), 0.18);
     }
 
     .store-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 40px rgba(var(--ink-rgb), 0.18);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(var(--ink-rgb), 0.22);
       background: var(--cta-hover);
     }
 
@@ -737,6 +738,14 @@
     }
 
     .feature-card.coming-soon {
+      opacity: 0.92;
+    }
+
+    .feature-card.coming-soon.reveal {
+      opacity: 0;
+    }
+
+    .feature-card.coming-soon.reveal.is-visible {
       opacity: 0.92;
     }
 
@@ -1068,6 +1077,7 @@
     }
 
     .cta-box .store-btn:hover {
+      transform: translateY(-3px);
       background: #ffffff;
       box-shadow:
         0 12px 36px rgba(var(--ink-rgb), 0.18),
@@ -1434,7 +1444,7 @@
       <p>Honest tips, any occasion, and a closet that grows with you.</p>
     </div>
     <div class="features-grid">
-      <div class="feature-card">
+      <div class="feature-card reveal">
         <div class="feature-icon" aria-hidden="true">
           <i class="ph ph-chat-circle"></i>
         </div>
@@ -1443,7 +1453,7 @@
           Honest reads on what works, what to change, and what to try next.
         </p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card reveal">
         <div class="feature-icon" aria-hidden="true">
           <i class="ph ph-map-pin"></i>
         </div>
@@ -1453,7 +1463,7 @@
           match the moment.
         </p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card reveal">
         <div class="feature-icon" aria-hidden="true">
           <i class="ph ph-chart-line-up"></i>
         </div>
@@ -1463,7 +1473,7 @@
           like.
         </p>
       </div>
-      <div class="feature-card coming-soon">
+      <div class="feature-card coming-soon reveal">
         <div class="feature-card-top">
           <div class="feature-icon" aria-hidden="true">
             <i class="ph ph-coat-hanger"></i>
@@ -1476,7 +1486,7 @@
           itself as you style.
         </p>
       </div>
-      <div class="feature-card coming-soon">
+      <div class="feature-card coming-soon reveal">
         <div class="feature-card-top">
           <div class="feature-icon" aria-hidden="true">
             <i class="ph ph-bookmark-simple"></i>
@@ -1489,7 +1499,7 @@
           away.
         </p>
       </div>
-      <div class="feature-card coming-soon">
+      <div class="feature-card coming-soon reveal">
         <div class="feature-card-top">
           <div class="feature-icon" aria-hidden="true">
             <i class="ph ph-sparkle"></i>
@@ -1763,6 +1773,7 @@
       }
     }
   </script>
+  <script src="scripts/reveal.js"></script>
   <script src="scripts/modal.js"></script>
 </body>
 

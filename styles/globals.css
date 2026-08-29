@@ -82,3 +82,55 @@
   --font-display: "Clash Display", sans-serif;
   --font-body: "Metropolis", sans-serif;
 }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.features-grid .reveal:nth-child(1),
+.pricing-grid .reveal:nth-child(1),
+.details-grid .reveal:nth-child(1) {
+  --reveal-delay: 0s;
+}
+
+.features-grid .reveal:nth-child(2),
+.pricing-grid .reveal:nth-child(2),
+.details-grid .reveal:nth-child(2) {
+  --reveal-delay: 0.07s;
+}
+
+.features-grid .reveal:nth-child(3),
+.pricing-grid .reveal:nth-child(3),
+.details-grid .reveal:nth-child(3) {
+  --reveal-delay: 0.14s;
+}
+
+.features-grid .reveal:nth-child(4) {
+  --reveal-delay: 0.08s;
+}
+
+.features-grid .reveal:nth-child(5) {
+  --reveal-delay: 0.15s;
+}
+
+.features-grid .reveal:nth-child(6) {
+  --reveal-delay: 0.22s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

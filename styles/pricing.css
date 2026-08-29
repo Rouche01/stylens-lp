@@ -610,6 +610,10 @@ nav .nav-cta:hover {
   text-align: center;
   font-weight: 600;
   box-shadow: 0 14px 34px rgba(var(--ink-rgb), 0.2);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
 }
 
 .plan-cta:hover,
@@ -618,7 +622,9 @@ nav .nav-cta:hover {
 }
 
 .plan-cta:hover {
+  transform: translateY(-3px);
   background: var(--cta-hover);
+  box-shadow: 0 16px 40px rgba(var(--ink-rgb), 0.24);
 }
 
 .pricing-details {
@@ -809,13 +815,13 @@ nav .nav-cta:hover {
     0 8px 24px rgba(var(--ink-rgb), 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
   transition:
-    transform 0.25s,
-    box-shadow 0.25s,
-    background 0.25s;
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
 }
 
 .cta-btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   box-shadow:
     0 12px 36px rgba(var(--ink-rgb), 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
@@ -831,11 +837,13 @@ nav .nav-cta:hover {
   font-weight: 600;
   background: rgba(255, 255, 255, 0.06);
   transition:
-    background 0.25s,
-    border-color 0.25s;
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .ghost-btn:hover {
+  transform: translateY(-2px);
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.35);
 }
@@ -917,9 +925,9 @@ nav .nav-cta:hover {
   justify-content: center;
   flex-shrink: 0;
   transition:
-    transform 0.3s,
-    background 0.3s,
-    color 0.3s;
+    transform 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease;
 }
 
 .faq-item[open] summary::after {
@@ -929,12 +937,55 @@ nav .nav-cta:hover {
   color: var(--cta);
 }
 
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+
+.faq-item[open] .faq-answer {
+  grid-template-rows: 1fr;
+}
+
+.faq-answer-inner {
+  overflow: hidden;
+}
+
 .faq-item p {
   color: var(--text-secondary);
   font-size: 14px;
   line-height: 1.6;
   padding: 0 8px 20px;
-  margin-top: -4px;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    opacity 0.28s ease,
+    transform 0.28s ease;
+}
+
+.faq-item[open] p {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.06s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-answer {
+    transition: none;
+  }
+
+  .faq-item p {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .plan-cta,
+  .cta-btn,
+  .ghost-btn {
+    transition: none;
+  }
 }
 
 /* FOOTER */
