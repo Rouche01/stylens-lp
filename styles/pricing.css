@@ -507,8 +507,11 @@ nav .nav-cta:hover {
 
 .plan-header {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  column-gap: 12px;
+  row-gap: 10px;
 }
 
 .plan-header h2 {
@@ -516,6 +519,7 @@ nav .nav-cta:hover {
   font-size: 20px;
   font-weight: 600;
   color: var(--primary);
+  white-space: nowrap;
 }
 
 .plan-tag {
@@ -528,6 +532,8 @@ nav .nav-cta:hover {
   border: 1px solid rgba(255, 255, 255, 0.4);
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .plan-card.featured .plan-tag {
@@ -544,12 +550,17 @@ nav .nav-cta:hover {
 }
 
 .amount {
+  font-family: var(--font-display);
   font-size: 40px;
   font-weight: 700;
+  letter-spacing: -0.03em;
   color: var(--primary);
 }
 
 .period {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 500;
   color: var(--muted);
 }
 
@@ -562,6 +573,8 @@ nav .nav-cta:hover {
 .plan-desc {
   color: var(--muted);
   font-size: 15px;
+  line-height: 1.45;
+  margin: 0;
 }
 
 .price-note {
@@ -577,6 +590,8 @@ nav .nav-cta:hover {
   padding: 0;
   margin: 0;
   color: var(--text);
+  font-size: 14px;
+  line-height: 1.45;
 }
 
 .plan-list li::before {
@@ -640,31 +655,37 @@ nav .nav-cta:hover {
 .details-card h2 {
   font-family: var(--font-display);
   font-size: 32px;
-  margin-bottom: 32px;
+  margin-bottom: 8px;
   font-weight: 600;
+  letter-spacing: -0.03em;
   color: var(--primary);
+}
+
+.details-header {
+  margin-bottom: 32px;
+}
+
+.details-header p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.45;
+  max-width: 36ch;
+  margin: 0 auto;
 }
 
 .details-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 16px;
   text-align: left;
 }
 
 .detail-item {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
   padding: 22px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.5),
-    0 2px 12px -2px rgba(var(--ink-rgb), 0.05);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  border-radius: 18px;
+  background: var(--card);
+  border: 1px solid rgba(var(--ink-rgb), 0.04);
+  box-shadow: 0 8px 24px rgba(var(--ink-rgb), 0.05);
   transition:
     transform 0.25s,
     box-shadow 0.25s;
@@ -672,36 +693,41 @@ nav .nav-cta:hover {
 
 .detail-item:hover {
   transform: translateY(-2px);
-  box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.6),
-    0 8px 24px -4px rgba(var(--ink-rgb), 0.1);
+  box-shadow: 0 12px 28px rgba(var(--ink-rgb), 0.08);
 }
 
 .detail-icon {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
+  margin-bottom: 14px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  font-size: 20px;
-  line-height: 1;
+  background: var(--accent-soft);
+  color: var(--primary);
   flex-shrink: 0;
 }
 
+.detail-icon .ph {
+  font-size: 22px;
+  line-height: 1;
+}
+
 .details-grid h3 {
-  font-size: 15px;
+  font-family: var(--font-display);
+  font-size: 17px;
   font-weight: 600;
-  margin-bottom: 4px;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
   color: var(--primary);
 }
 
 .details-grid p {
-  color: var(--text-secondary);
-  font-size: 13.5px;
-  line-height: 1.45;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
 }
 
 .cta-section {

@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="styles/globals.css" />
   <link rel="stylesheet" href="styles/modal.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
+  />
   <link rel="icon" href="favicon.ico" />
   <title>GoStylens - Your personal stylist on the go.</title>
   <meta name="description"
@@ -342,7 +346,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 120px 20px 60px;
+      padding: 160px 20px 60px;
       position: relative;
       overflow: hidden;
     }
@@ -641,9 +645,9 @@
 
     /* FEATURES */
     .features {
-      padding: 64px 40px;
+      padding: 56px 40px 48px;
       max-width: 1100px;
-      margin: 0 auto;
+      margin: 40px auto 0;
       background: rgba(var(--surface-rgb), 0.55);
       border: 1.5px solid rgba(255, 255, 255, 0.45);
       border-radius: 28px;
@@ -675,7 +679,7 @@
 
     .features-header {
       text-align: center;
-      margin-bottom: 64px;
+      margin-bottom: 36px;
     }
 
     .features-header h2 {
@@ -695,79 +699,102 @@
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: 20px;
     }
 
     .feature-card {
-      background: rgba(255, 255, 255, 0.35);
+      background: var(--card);
       border-radius: 20px;
-      padding: 32px;
-      border: 1px solid rgba(255, 255, 255, 0.5);
+      padding: 24px;
+      border: 1px solid rgba(var(--ink-rgb), 0.04);
       transition:
         transform 0.3s,
         border-color 0.3s,
-        box-shadow 0.3s,
-        background 0.3s;
-      box-shadow:
-        0 8px 24px rgba(var(--ink-rgb), 0.04),
-        inset 0 1px 0 rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+        box-shadow 0.3s;
+      box-shadow: 0 8px 24px rgba(var(--ink-rgb), 0.05);
     }
 
     .feature-card:hover {
-      transform: translateY(-4px);
-      background: rgba(255, 255, 255, 0.5);
-      border-color: rgba(255, 255, 255, 0.65);
-      box-shadow:
-        0 14px 36px rgba(var(--ink-rgb), 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      transform: translateY(-3px);
+      box-shadow: 0 14px 32px rgba(var(--ink-rgb), 0.08);
     }
 
     .feature-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
-      margin-bottom: 18px;
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.75);
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.8),
-        0 4px 12px rgba(var(--ink-rgb), 0.06);
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      background: var(--accent-soft);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
+      color: var(--primary);
+    }
+
+    .feature-icon .ph {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .feature-card.coming-soon {
+      opacity: 0.92;
+    }
+
+    .feature-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .feature-card-top .feature-icon {
+      margin-bottom: 0;
+    }
+
+    .feature-soon {
+      flex-shrink: 0;
+      margin-top: 4px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(var(--ink-rgb), 0.04);
+      border: 1px solid rgba(var(--ink-rgb), 0.06);
+      font-size: 10px;
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+      color: var(--text-secondary);
     }
 
     .feature-card h3 {
       font-family: var(--font-display);
       font-size: 18px;
-      font-weight: 500;
-      margin-bottom: 8px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
       color: var(--primary);
     }
 
     .feature-card p {
       font-size: 14px;
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.55;
     }
 
     /* HOW IT WORKS */
     .how-it-works {
-      padding: 72px 40px;
+      padding: 64px 40px;
       scroll-margin-top: 100px;
     }
 
     .how-inner {
-      max-width: 900px;
+      max-width: 960px;
       margin: 0 auto;
     }
 
     .how-header {
       text-align: center;
-      margin-bottom: 48px;
+      margin-bottom: 36px;
     }
 
     .how-header h2 {
@@ -785,51 +812,173 @@
     }
 
     .steps {
-      display: flex;
-      gap: 32px;
-      justify-content: center;
-      flex-wrap: wrap;
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px 48px;
     }
 
     .step {
-      flex: 1;
-      min-width: 200px;
-      max-width: 260px;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .step-ring {
+      position: relative;
+      width: 72px;
+      height: 72px;
+      margin-bottom: 16px;
+      transform-origin: center;
+    }
+
+    .step-ring svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .step-ring-track {
+      fill: none;
+      stroke: rgba(var(--accent-rgb), 0.28);
+      stroke-width: 3;
+    }
+
+    .step-ring-progress {
+      fill: none;
+      stroke: var(--secondary);
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-dasharray: 201;
+      stroke-dashoffset: 201;
+      transition: stroke-dashoffset 0.55s cubic-bezier(0.33, 1, 0.68, 1);
+    }
+
+    .steps.is-inview .step[data-progress="1"] .step-ring-progress {
+      stroke-dashoffset: 134;
+      transition-delay: 0s;
+    }
+
+    .steps.is-inview .step[data-progress="2"] .step-ring-progress {
+      stroke-dashoffset: 67;
+      transition-delay: 0.12s;
+    }
+
+    .steps.is-inview .step[data-progress="3"] .step-ring-progress {
+      stroke-dashoffset: 0;
+      stroke: var(--cta);
+      transition-delay: 0.24s;
+    }
+
+    @keyframes step-ring-settle {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      45% {
+        transform: scale(1.07);
+      }
+    }
+
+    .steps.is-inview .step[data-progress="1"] .step-ring {
+      animation: step-ring-settle 0.38s ease-out 0.52s both;
+    }
+
+    .steps.is-inview .step[data-progress="2"] .step-ring {
+      animation: step-ring-settle 0.38s ease-out 0.64s both;
+    }
+
+    .steps.is-inview .step[data-progress="3"] .step-ring {
+      animation: step-ring-settle 0.38s ease-out 0.76s both;
     }
 
     .step-num {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
       font-family: var(--font-display);
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      margin: 0 auto 18px;
-      background: var(--cta);
-      display: flex;
-      align-items: center;
-      justify-content: center;
       font-size: 22px;
-      font-weight: 800;
-      color: #ffffff;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      color: var(--cta);
+      line-height: 1;
+      opacity: 0;
+      transform: scale(0.82);
+      transition:
+        opacity 0.4s ease,
+        transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .steps.is-inview .step[data-progress="1"] .step-num {
+      opacity: 1;
+      transform: scale(1);
+      transition-delay: 0.22s;
+    }
+
+    .steps.is-inview .step[data-progress="2"] .step-num {
+      opacity: 1;
+      transform: scale(1);
+      transition-delay: 0.34s;
+    }
+
+    .steps.is-inview .step[data-progress="3"] .step-num {
+      opacity: 1;
+      transform: scale(1);
+      transition-delay: 0.46s;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .step-ring-progress,
+      .step-num {
+        transition: none;
+      }
+
+      .steps.is-inview .step .step-ring,
+      .step .step-ring {
+        animation: none;
+      }
+
+      .step[data-progress="1"] .step-ring-progress {
+        stroke-dashoffset: 134;
+      }
+
+      .step[data-progress="2"] .step-ring-progress {
+        stroke-dashoffset: 67;
+      }
+
+      .step[data-progress="3"] .step-ring-progress {
+        stroke-dashoffset: 0;
+        stroke: var(--cta);
+      }
+
+      .step-num {
+        opacity: 1;
+        transform: none;
+      }
     }
 
     .step h3 {
       font-family: var(--font-display);
-      font-size: 16px;
-      font-weight: 500;
-      margin-bottom: 8px;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
       color: var(--primary);
     }
 
     .step p {
-      font-size: 13px;
+      font-size: 15px;
       color: var(--muted);
-      line-height: 1.5;
+      line-height: 1.55;
+      max-width: 26ch;
     }
 
     /* CTA */
     .cta-section {
-      padding: 40px 20px 80px;
+      padding: 48px 20px 96px;
       text-align: center;
       background: transparent;
       max-width: 1100px;
@@ -1009,6 +1158,24 @@
         grid-template-columns: 1fr;
       }
 
+      .features,
+      .how-it-works {
+        padding: 72px 24px;
+      }
+
+      .features {
+        padding: 40px 20px 36px;
+        margin-top: 48px;
+      }
+
+      .how-it-works {
+        padding: 48px 24px;
+      }
+
+      .cta-section {
+        padding: 56px 20px 80px;
+      }
+
       .hero-text h1 {
         font-size: 32px;
       }
@@ -1132,8 +1299,14 @@
       }
 
       .steps {
-        flex-direction: column;
-        align-items: center;
+        grid-template-columns: 1fr;
+        gap: 36px;
+        max-width: 320px;
+        margin: 0 auto;
+      }
+
+      .step p {
+        max-width: none;
       }
 
       .cta-box {
@@ -1190,7 +1363,7 @@
     <div class="phone-slider" id="phoneSlider">
       <div class="phone" id="phone0">
         <img
-          src="assets/screenshot-capture-v2.png"
+          src="assets/screenshot-capture-v3.png"
           alt="GoStylens Capture — Strike a Pose and take a photo of your outfit"
           width="290"
           height="630"
@@ -1229,9 +1402,8 @@
       <div class="hero-badge">✨ AI-Powered Style Assistant</div>
       <h1>Your Personal Stylist,<br />Right in Your Pocket</h1>
       <p>
-        Snap a selfie, tell us where you're headed, and get instant AI
-        feedback on your outfit. GoStylens learns your style and helps you
-        look your best — every single day.
+        Share your outfit. Get what works, what to change, and what to try
+        next, in seconds.
       </p>
       <div class="store-buttons" id="download">
         <a href="#" class="store-btn">
@@ -1258,56 +1430,76 @@
 
   <section class="features" id="features">
     <div class="features-header">
-      <h2>Why GoStylens?</h2>
-      <p>Smart features that make getting dressed effortless</p>
+      <h2>Built for Real Outfits</h2>
+      <p>Honest tips, any occasion, and a closet that grows with you.</p>
     </div>
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon">📸</div>
-        <h3>Snap & Analyze</h3>
+        <div class="feature-icon" aria-hidden="true">
+          <i class="ph ph-chat-circle"></i>
+        </div>
+        <h3>Photo In, Tips Out</h3>
         <p>
-          Take a quick mirror selfie and our AI instantly understands your
-          outfit — colors, fit, style, and vibe.
+          Honest reads on what works, what to change, and what to try next.
         </p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">🎯</div>
-        <h3>Occasion-Perfect</h3>
+        <div class="feature-icon" aria-hidden="true">
+          <i class="ph ph-map-pin"></i>
+        </div>
+        <h3>Any Occasion</h3>
         <p>
-          Whether it's a boardroom meeting or a beach party, get feedback
-          tailored to exactly where you're going.
+          Tell us where you're headed: work, a date, brunch. Get tips that
+          match the moment.
         </p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">🧠</div>
-        <h3>Learns Your Style</h3>
+        <div class="feature-icon" aria-hidden="true">
+          <i class="ph ph-chart-line-up"></i>
+        </div>
+        <h3>Your Style, Remembered</h3>
         <p>
-          The more you use it, the smarter it gets. GoStylens builds your
-          unique style DNA over time.
+          The more you share, the better it knows what you actually wear and
+          like.
         </p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">💡</div>
-        <h3>Instant Tips</h3>
+      <div class="feature-card coming-soon">
+        <div class="feature-card-top">
+          <div class="feature-icon" aria-hidden="true">
+            <i class="ph ph-coat-hanger"></i>
+          </div>
+          <span class="feature-soon">Coming soon</span>
+        </div>
+        <h3>Builds Your Closet</h3>
         <p>
-          Simple, actionable suggestions to elevate your look — swap this, add
-          that, you're golden.
+          Every piece you share gets added automatically. Your closet fills
+          itself as you style.
         </p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">👗</div>
-        <h3>Wardrobe Memory</h3>
+      <div class="feature-card coming-soon">
+        <div class="feature-card-top">
+          <div class="feature-icon" aria-hidden="true">
+            <i class="ph ph-bookmark-simple"></i>
+          </div>
+          <span class="feature-soon">Coming soon</span>
+        </div>
+        <h3>Saved Looks</h3>
         <p>
-          Save your best looks and build a digital wardrobe. Never forget an
-          outfit that got compliments.
+          Bookmark outfits you loved so your best fits are always one tap
+          away.
         </p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">✨</div>
-        <h3>Smart Suggestions</h3>
+      <div class="feature-card coming-soon">
+        <div class="feature-card-top">
+          <div class="feature-icon" aria-hidden="true">
+            <i class="ph ph-sparkle"></i>
+          </div>
+          <span class="feature-soon">Coming soon</span>
+        </div>
+        <h3>Ideas From Your Closet</h3>
         <p>
-          Get personalized outfit ideas based on what's already worked for
-          you. Less guessing, more dressing.
+          Fresh combos built from what you already own and what's worked
+          before.
         </p>
       </div>
     </div>
@@ -1316,35 +1508,52 @@
   <section class="how-it-works" id="how">
     <div class="how-inner">
       <div class="how-header">
-        <h2>How It Works</h2>
-        <p>Three simple steps to outfit confidence</p>
+        <h2>From Photo to Fit</h2>
+        <p>Photo in. Context on. Tips out.</p>
       </div>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <h3>Snap a Selfie</h3>
+      <ol class="steps">
+        <li class="step" data-progress="1">
+          <div class="step-ring" aria-hidden="true">
+            <svg viewBox="0 0 72 72">
+              <circle class="step-ring-track" cx="36" cy="36" r="32"></circle>
+              <circle class="step-ring-progress" cx="36" cy="36" r="32"></circle>
+            </svg>
+            <span class="step-num">1</span>
+          </div>
+          <h3>Snap Your Fit</h3>
           <p>
-            Take a quick mirror pic in what you're wearing. No perfect angles
-            needed.
+            A quick photo of what you're wearing. Casual is fine, no perfect
+            shot needed.
           </p>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
+        </li>
+        <li class="step" data-progress="2">
+          <div class="step-ring" aria-hidden="true">
+            <svg viewBox="0 0 72 72">
+              <circle class="step-ring-track" cx="36" cy="36" r="32"></circle>
+              <circle class="step-ring-progress" cx="36" cy="36" r="32"></circle>
+            </svg>
+            <span class="step-num">2</span>
+          </div>
           <h3>Set the Scene</h3>
           <p>
-            Tell GoStylens where you're going — work, a date, brunch, or
-            anywhere else.
+            Add where you're headed: work, a date, brunch, or anything in
+            between.
           </p>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
+        </li>
+        <li class="step" data-progress="3">
+          <div class="step-ring" aria-hidden="true">
+            <svg viewBox="0 0 72 72">
+              <circle class="step-ring-track" cx="36" cy="36" r="32"></circle>
+              <circle class="step-ring-progress" cx="36" cy="36" r="32"></circle>
+            </svg>
+            <span class="step-num">3</span>
+          </div>
           <h3>Get Styled</h3>
           <p>
-            Receive instant feedback, a style score, and tips to look your
-            absolute best.
+            Instant tips on what works, what to change, and what to try next.
           </p>
-        </div>
-      </div>
+        </li>
+      </ol>
     </div>
   </section>
 
@@ -1532,6 +1741,27 @@
     window.addEventListener("scroll", updateNavTransparency, {
       passive: true,
     });
+
+    const steps = document.querySelector(".how-it-works .steps");
+    if (steps) {
+      if (reduceMotion) {
+        steps.classList.add("is-inview");
+      } else if ("IntersectionObserver" in window) {
+        const stepsObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              steps.classList.add("is-inview");
+              stepsObserver.disconnect();
+            });
+          },
+          { threshold: 0.4 },
+        );
+        stepsObserver.observe(steps);
+      } else {
+        steps.classList.add("is-inview");
+      }
+    }
   </script>
   <script src="scripts/modal.js"></script>
 </body>
