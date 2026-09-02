@@ -1,10 +1,48 @@
 /**
- * Server-side store routing for QR / share links.
- * Intercepts /get, /get.html, and ?download=1 before any HTML is served.
+ * Cloudflare Pages middleware:
+ * - Store routing for /get and ?download=1
+ * - Consent-region cookie from CF-IPCountry (EU/EEA/UK/CH → banner required)
  */
 const APP_STORE_URL = "https://apps.apple.com/app/gostylens/id6760427902";
 const PLAY_STORE_URL =
   "https://play.google.com/store/apps/details?id=com.stylenslab.gostylens";
+
+const CONSENT_REQUIRED_COUNTRIES = new Set([
+  "AT",
+  "BE",
+  "BG",
+  "HR",
+  "CY",
+  "CZ",
+  "DK",
+  "EE",
+  "FI",
+  "FR",
+  "DE",
+  "GR",
+  "HU",
+  "IE",
+  "IT",
+  "LV",
+  "LT",
+  "LU",
+  "MT",
+  "NL",
+  "PL",
+  "PT",
+  "RO",
+  "SK",
+  "SI",
+  "ES",
+  "SE",
+  "IS",
+  "LI",
+  "NO",
+  "GB",
+  "CH",
+]);
+
+const CONSENT_REGION_COOKIE = "gostylens_consent_required";
 
 function isIOS(ua) {
   return (
@@ -35,21 +73,41 @@ function storeRedirectResponse(ua) {
   return null;
 }
 
+function isConsentRequiredCountry(country) {
+  return CONSENT_REQUIRED_COUNTRIES.has(country);
+}
+
+function withConsentRegionCookie(response, country, isHttps) {
+  const required = isConsentRequiredCountry(country) ? "1" : "0";
+  const secure = isHttps ? "; Secure" : "";
+  const cookie = `${CONSENT_REGION_COOKIE}=${required}; Path=/; Max-Age=86400; SameSite=Lax${secure}`;
+
+  const next = new Response(response.body, response);
+  next.headers.append("Set-Cookie", cookie);
+  return next;
+}
+
 export async function onRequest(context) {
-  const url = new URL(context.request.url);
+  const { request } = context;
+  const url = new URL(request.url);
+  const country = request.cf?.country || "";
+  const isHttps = url.protocol === "https:";
 
-  if (!wantsStoreRedirect(url)) {
-    return context.next();
+  let response;
+
+  if (wantsStoreRedirect(url)) {
+    const ua = request.headers.get("user-agent") || "";
+    const storeResponse = storeRedirectResponse(ua);
+    if (storeResponse) {
+      response = storeResponse;
+    } else if (url.pathname.replace(/\/$/, "") !== "/get.html") {
+      response = Response.redirect(new URL("/get.html", url.origin), 302);
+    } else {
+      response = await context.next();
+    }
+  } else {
+    response = await context.next();
   }
 
-  const ua = context.request.headers.get("user-agent") || "";
-  const storeResponse = storeRedirectResponse(ua);
-  if (storeResponse) return storeResponse;
-
-  // Desktop / unknown: show the static chooser page
-  if (url.pathname.replace(/\/$/, "") !== "/get.html") {
-    return Response.redirect(new URL("/get.html", url.origin), 302);
-  }
-
-  return context.next();
+  return withConsentRegionCookie(response, country, isHttps);
 }

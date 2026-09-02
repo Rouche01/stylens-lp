@@ -47,11 +47,42 @@
     return "unknown";
   }
 
+  var CONSENT_KEY = "gostylens_analytics_consent";
+
+  function readStoredConsent() {
+    try {
+      var value = localStorage.getItem(CONSENT_KEY);
+      if (value === "accepted" || value === "rejected") return value;
+    } catch (e) {}
+    return null;
+  }
+
+  function writeStoredConsent(choice) {
+    try {
+      localStorage.setItem(CONSENT_KEY, choice);
+    } catch (e) {}
+  }
+
+  function applyConsent(choice) {
+    if (choice !== "accepted" && choice !== "rejected") return;
+    if (!window.posthog) return;
+
+    writeStoredConsent(choice);
+    if (choice === "accepted") {
+      window.posthog.opt_in_capturing();
+    } else {
+      window.posthog.opt_out_capturing();
+    }
+    window.posthog.capture("$pageview");
+  }
+
   window.gostylensAnalytics = {
     capture: capture,
     getPageName: function () {
       return pageName;
     },
+    getConsent: readStoredConsent,
+    applyConsent: applyConsent,
     get isReady() {
       return ready;
     },
@@ -109,10 +140,14 @@
   window.posthog.init(config.apiKey, {
     api_host: host,
     ui_host: "https://us.posthog.com",
-    defaults: '2026-05-30',
-    persistence: "memory",
+    defaults: "2026-05-30",
+    persistence: "localStorage+cookie",
+    cross_subdomain_cookie: true,
+    cookieless_mode: "on_reject",
+    opt_out_capturing_by_default: true,
+    opt_out_persistence_by_default: true,
     autocapture: false,
-    capture_pageview: true,
+    capture_pageview: false,
     capture_pageleave: true,
     capture_dead_clicks: false,
     capture_performance: false,
@@ -127,6 +162,7 @@
       });
       ready = true;
       flushQueue();
+      document.dispatchEvent(new CustomEvent("gostylens:posthog-ready"));
     },
   });
 

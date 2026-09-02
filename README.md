@@ -40,3 +40,21 @@ If scripts fail to load locally with `ERR_BLOCKED_BY_CONTENT_BLOCKER`, disable y
 
    - Open `https://gostylens.app/scripts/gostylens.config.js` — should return JS, not 404.
    - Browse the site and check PostHog **Live events** for `$pageview` with `surface: landing_page`.
+
+### Cookie consent
+
+Analytics uses PostHog with `localStorage+cookie` persistence after the visitor accepts the banner. Before acceptance, no analytics cookies are set. If the visitor rejects, PostHog falls back to cookieless mode (`cookieless_mode: on_reject`).
+
+**Consent banner by region:** On Cloudflare Pages, [`functions/_middleware.js`](functions/_middleware.js) sets a `gostylens_consent_required` cookie from `CF-IPCountry`. Visitors in the EU/EEA, UK, or Switzerland see the Accept/Reject banner. Everyone else is opted in automatically (no banner). Local dev without Cloudflare defaults to showing the banner.
+
+**One-time PostHog project setting (required before deploy):** In PostHog → **Project settings**, enable **Cookieless mode**. Without this, events from visitors who reject cookies are ignored.
+
+**Verify locally:**
+
+1. Open the site in a private window — the consent banner should appear at the bottom (local dev has no geo cookie, so banner is shown).
+2. Before clicking Accept, check DevTools → Application → Cookies — no `ph_*` cookie should be present.
+3. Click **Accept analytics** — a `ph_*` PostHog cookie should appear; reload and confirm the banner stays hidden.
+4. Clear site data, reload, click **Reject** — no `ph_*` cookie; events should still appear in PostHog Live (cookieless).
+5. Navigate home → pricing → get after accepting — events should share the same `$session_id`.
+
+**Verify geo auto-accept (production):** From a non-EU VPN or by setting `gostylens_consent_required=0` in DevTools, reload — banner should not appear and analytics should start immediately.
