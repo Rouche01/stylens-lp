@@ -34,6 +34,8 @@ If scripts fail to load locally with `ERR_BLOCKED_BY_CONTENT_BLOCKER`, disable y
 
    The build command writes `scripts/gostylens.config.js` before deploy. The key stays out of git but is public in the browser (normal for PostHog client keys).
 
+   If `gostylens.config.js` is missing in production, Cloudflare serves `index.html` for that URL and the browser logs a MIME type error (`text/html` is not executable). Check the deploy build log for `Wrote .../gostylens.config.js`.
+
 3. **Verify after deploy**
 
    - Open `https://gostylens.app/scripts/gostylens.config.js` — should return JS, not 404.
