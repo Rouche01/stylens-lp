@@ -2,7 +2,7 @@
 (function () {
   const APP_STORE_URL = "https://apps.apple.com/app/gostylens/id6760427902";
   const PLAY_STORE_URL =
-    "https://play.google.com/store/apps/details?id=com.gostylens";
+    "https://play.google.com/store/apps/details?id=com.stylenslab.gostylens";
   const DOWNLOAD_QR_URL = "https://gostylens.app/get";
 
   function isIOS() {
