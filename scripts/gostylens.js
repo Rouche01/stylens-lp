@@ -108,6 +108,8 @@
 
   window.posthog.init(config.apiKey, {
     api_host: host,
+    ui_host: "https://us.posthog.com",
+    defaults: '2026-05-30',
     persistence: "memory",
     autocapture: false,
     capture_pageview: true,

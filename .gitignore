@@ -4,3 +4,6 @@
 
 # PostHog (copy from scripts/gostylens.config.example.js)
 scripts/gostylens.config.js
+
+# Cursor
+.cursor/
