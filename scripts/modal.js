@@ -17,6 +17,25 @@
     return /Android/i.test(navigator.userAgent || "");
   }
 
+  function track(event, props) {
+    if (window.gostylensAnalytics) {
+      window.gostylensAnalytics.capture(event, props);
+    }
+  }
+
+  function getCtaLocation(btn) {
+    if (btn.classList.contains("nav-cta")) return "nav";
+    if (btn.classList.contains("plan-cta")) {
+      const card = btn.closest(".plan-card");
+      if (card && card.classList.contains("is-free")) return "pricing_plan_free";
+      if (card && card.classList.contains("featured")) return "pricing_plan_core";
+      return "pricing_plan";
+    }
+    if (btn.classList.contains("cta-btn")) return "pricing_bottom_cta";
+    if (btn.classList.contains("store-btn")) return "hero_footer";
+    return "unknown";
+  }
+
   // Inject modal HTML
   const modalHTML = `
     <div class="modal-overlay" id="appModal">
@@ -49,26 +68,31 @@
 
   const appModal = document.getElementById("appModal");
 
-  function openModal() {
+  function openModal(trigger) {
     appModal.classList.add("open");
     document.body.style.overflow = "hidden";
+    track("store_modal_opened", { trigger: trigger || "cta" });
   }
 
-  function routeToStoreOrModal() {
+  function routeToStoreOrModal(location) {
     if (isIOS()) {
+      track("store_link_clicked", { store: "ios", location: location });
       window.location.href = APP_STORE_URL;
       return;
     }
     if (isAndroid()) {
+      track("store_link_clicked", { store: "android", location: location });
       window.location.href = PLAY_STORE_URL;
       return;
     }
-    openModal();
+    openModal("cta");
   }
 
   function handleGetApp(e) {
     e.preventDefault();
-    routeToStoreOrModal();
+    const location = getCtaLocation(e.currentTarget);
+    track("download_cta_clicked", { location: location });
+    routeToStoreOrModal(location);
   }
 
   function closeModal() {
@@ -80,7 +104,7 @@
   try {
     const params = new URLSearchParams(window.location.search);
     if (params.get("download") === "1" || params.get("get") === "1") {
-      if (!isIOS() && !isAndroid()) openModal();
+      if (!isIOS() && !isAndroid()) openModal("download_param");
     }
   } catch (e) {}
 
@@ -92,6 +116,13 @@
     .forEach(function (btn) {
       btn.addEventListener("click", handleGetApp);
     });
+
+  appModal.querySelectorAll(".modal-stores .store-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      const store = btn.getAttribute("href") === APP_STORE_URL ? "ios" : "android";
+      track("store_link_clicked", { store: store, location: "modal" });
+    });
+  });
 
   // Close modal
   appModal.querySelector(".modal-close").addEventListener("click", closeModal);
