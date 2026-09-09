@@ -5,8 +5,8 @@
       "namespace": "android_app",
       "package_name": "com.stylenslab.gostylens",
       "sha256_cert_fingerprints": [
-        "REPLACE_WITH_PLAY_APP_SIGNING_SHA256",
-        "REPLACE_WITH_UPLOAD_KEYSTORE_SHA256"
+        "91:5B:29:B2:D4:F3:65:79:7B:8E:43:66:EC:6F:86:22:8B:5A:1B:A9:24:45:6F:32:D4:A4:DE:82:82:D7:C5:0F",
+        "E4:57:88:1E:17:9A:FF:16:79:F0:9A:E1:8B:A9:57:F2:85:AD:3C:A3:40:FC:AC:89:39:C4:2C:C2:F2:AE:EF:8F"
       ]
     }
   }
