@@ -1,0 +1,32 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "66CDU75A5S.com.stylenslab.gostylens"
+        ],
+        "components": [
+          { "/": "/capture" },
+          { "/": "/capture/*" },
+          { "/": "/closet" },
+          { "/": "/closet/*" },
+          { "/": "/history" },
+          { "/": "/history/*" },
+          { "/": "/session" },
+          { "/": "/session/*" },
+          { "/": "/paywall" },
+          { "/": "/paywall/*" },
+          { "/": "/billing" },
+          { "/": "/billing/*" },
+          { "/": "/open" },
+          { "/": "/open/*" },
+          { "/": "/invite" },
+          { "/": "/invite/*" },
+          { "/": "/get" },
+          { "/": "/get.html" },
+          { "/": "/get/*" }
+        ]
+      }
+    ]
+  }
+}

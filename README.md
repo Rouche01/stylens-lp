@@ -41,6 +41,28 @@ If scripts fail to load locally with `ERR_BLOCKED_BY_CONTENT_BLOCKER`, disable y
    - Open `https://gostylens.app/scripts/gostylens.config.js` — should return JS, not 404.
    - Browse the site and check PostHog **Live events** for `$pageview` with `surface: landing_page`.
 
+### Universal Links / Android App Links
+
+Association files live in [`.well-known/`](.well-known/) and must be served as `application/json` with no redirect (see [`_headers`](_headers)).
+
+| File | URL |
+|------|-----|
+| Apple AASA | `https://gostylens.app/.well-known/apple-app-site-association` |
+| Android Digital Asset Links | `https://gostylens.app/.well-known/assetlinks.json` |
+
+Claimed app paths: `/capture`, `/closet`, `/history`, `/session/*`, `/paywall`, `/billing`, `/open`, `/invite`, `/get`. Marketing pages (`/`, `/privacy`, `/terms`, `/support`, `/pricing`) stay in the browser.
+
+**Before Android verification works**, replace the `REPLACE_WITH_*` fingerprints in [`assetlinks.json`](.well-known/assetlinks.json):
+
+1. Play Console → the GoStylens app → **Test and release → App integrity → App signing** — copy the **SHA-256 certificate fingerprint** (Play App Signing cert, not the upload key alone).
+2. Optionally add the upload-keystore SHA-256 (and the debug keystore SHA-256 if you want App Links in local debug builds):
+
+```bash
+keytool -list -v -keystore /path/to/release.keystore -alias YOUR_ALIAS
+```
+
+Use colon-separated hex, e.g. `AB:CD:…`. After deploy, confirm both URLs return JSON (not the homepage HTML).
+
 ### Cookie consent
 
 Analytics uses PostHog with `localStorage+cookie` persistence after the visitor accepts the banner. Before acceptance, no analytics cookies are set. If the visitor rejects, PostHog falls back to cookieless mode (`cookieless_mode: on_reject`).

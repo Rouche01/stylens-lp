@@ -93,6 +93,12 @@ export async function onRequest(context) {
   const country = request.cf?.country || "";
   const isHttps = url.protocol === "https:";
 
+  // Universal / App Link association files must be served as static JSON with
+  // no extra cookies or redirects. Apple and Google fetch these directly.
+  if (url.pathname.startsWith("/.well-known/")) {
+    return context.next();
+  }
+
   let response;
 
   if (wantsStoreRedirect(url)) {
